@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>徐美文 學術研究室 | Hsu Mei-Wen Academic Lab</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;700&family=Noto+Sans+TC:wght@300;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #1a1a1a;
+            --accent-color: #8d734a; /* 金棕色 */
+            --bg-color: #ffffff;
+            --section-bg: #fcfcfc;
+            --border-color: #eeeeee;
+        }
+
+        body { font-family: 'Noto Sans TC', sans-serif; color: var(--primary-color); background: var(--bg-color); margin: 0; line-height: 1.8; scroll-behavior: smooth; }
+        h1, h2, h3, h4 { font-family: 'Noto Serif TC', serif; font-weight: 700; }
+
+        /* 導覽列：右上角配置與位移 */
+        header {
+            position: fixed; top: 0; width: 100%; background: rgba(255, 255, 255, 0.98);
+            border-bottom: 1px solid var(--border-color); z-index: 1000;
+            display: flex; justify-content: space-between; align-items: center; padding: 1.2rem 8%;
+        }
+        .logo { font-size: 1.4rem; letter-spacing: 2px; color: var(--primary-color); }
+        nav { display: flex; align-items: center; padding-right: 15%; }
+        nav a { text-decoration: none; color: #555; margin-left: 2rem; font-size: 0.9rem; font-weight: 500; transition: 0.3s; }
+        nav a:hover { color: var(--accent-color); }
+
+        /* 英雄區 */
+        .hero { padding: 220px 8% 100px; text-align: center; }
+        .hero h1 { font-size: 3.5rem; margin: 0; letter-spacing: 4px; }
+        .hero p { font-size: 1.3rem; color: var(--accent-color); margin-top: 15px; font-weight: 500; }
+
+        /* 通用區塊標題 */
+        section { padding: 100px 15%; border-bottom: 1px solid var(--border-color); }
+        .section-title { 
+            font-size: 2.2rem; 
+            margin-bottom: 3.5rem; 
+            color: var(--primary-color); 
+            border-left: 6px solid var(--accent-color); 
+            padding-left: 20px;
+            letter-spacing: 1px;
+        }
+
+        /* 內容布局 */
+        .content-group { margin-bottom: 60px; }
+        .content-group h3 { font-size: 1.5rem; color: var(--accent-color); margin-bottom: 25px; border-bottom: 1px solid #f0f0f0; padding-bottom: 10px; }
+        
+        ul.data-list { list-style: none; padding: 0; }
+        ul.data-list li { margin-bottom: 15px; position: relative; padding-left: 25px; font-size: 1.05rem; text-align: justify; }
+        ul.data-list li::before { content: "▪"; position: absolute; left: 0; color: var(--accent-color); }
+
+        .media-link { color: var(--primary-color); text-decoration: none; font-weight: 500; border-bottom: 1px solid #ddd; transition: 0.3s; }
+        .media-link:hover { color: var(--accent-color); border-color: var(--accent-color); }
+
+        footer { padding: 80px; text-align: center; background: #fafafa; font-size: 0.9rem; color: #888; }
+        
+        .case-placeholder {
+            padding: 40px; border: 2px dashed #ddd; text-align: center; color: #aaa; border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="logo">徐美文 學術研究室</div>
+    <nav>
+        <a href="#about">學經歷</a>
+        <a href="#works">著作成果</a>
+        <a href="#media">媒體採訪</a>
+        <a href="#honors">專業榮譽</a>
+        <a href="#cases">修復案例</a>
+    </nav>
+</header>
+
+<section class="hero">
+    <h1>Hsu Mei-Wen, Ph.D.</h1>
+    <p>紙質文物修復專家 · 清代文獻檔案研究者</p>
+</section>
+
+<section id="about">
+    <h2 class="section-title">學經歷</h2>
+    <div class="content-group">
+        <h3>國際講學經歷</h3>
+        <ul class="data-list">
+            <li>2017年 香港大學專業進修「古籍維護與修護工作坊」講師</li>
+            <li>2019年 馬來西亞新山南方大學短期文化資產維護課程講師</li>
+        </ul>
+    </div>
+    <div class="content-group">
+        <h3>學術背景</h3>
+        <ul class="data-list">
+            <li>國立政治大學 圖書資訊與檔案學研究 博士</li>
+            <li>國立臺北大學 古典文獻學研究所 碩士</li>
+        </ul>
+    </div>
+    <div class="content-group">
+        <h3>專業經歷與委員會職務</h3>
+        <ul class="data-list">
+            <li>衛福部檔案管理小組 考評委員 / 社家署檔案管理小組 考評委員 (113-114年)</li>
+            <li>台灣電力公司秘書處文物典藏中心 檔案整飭修復諮詢顧問 (113-114年)</li>
+            <li>文化部文化資產局 藝文採購勞務審查委員 / 文物修護職能發展計劃委員 (113-114年)</li>
+            <li>圖書館學會圖書文獻保存修復委員會 委員/副主任委員 (第54、56屆)</li>
+            <li>國立公共資訊圖書館 珍籍修復暨檔案價值鑑定委員</li>
+            
+        </ul>
+    </div>
+</section>
+
+<section id="works" style="background: #fdfdfd;">
+    <h2 class="section-title">著作成果</h2>
+    <div class="content-group">
+        <h3>(一) 專書論文</h3>
+        <ul class="data-list">
+            <li>徐美文。〈錢謙益著述與藏書之研究〉。國立台北大學古典文獻學研究所，碩士論文，2019。</li>
+            <li>徐美文。〈盛清時期宮廷用紙之研究—以圖書、檔案、書畫為中心〉。國立政治大學圖書資訊與檔案學研究所，博士論文，2022。</li>
+            <li>徐美文。《盛清時期宮廷圖書用紙》。台北，元華出版，2025年12月。</li>
+        </ul>
+    </div>
+    <div class="content-group">
+        <h3>(二) 編著專書</h3>
+        <ul class="data-list">
+            <li>徐美文，簡張翔，陳盈如，施維真。《圖書修護三兩事：一起推開修護室的大門一窺修護世界的神秘面紗(繪本)》。2025年4月。</li>
+            <li>蔡美蒨，蔡燕青，徐美文，李王瀚。《本事-圖書維護小事典》。國立中央圖書館台灣分館出版。2010年1月。</li>
+            <li>徐美文。《臺灣圖書醫院修護成果紀錄電子書》。國立臺灣圖書館，2016年1月。</li>
+            <li>曾添福，徐美文。《裝幀源流-傳世聚珍談裝幀圖錄》。國立臺灣圖書館，2006年7月。</li>
+        </ul>
+    </div>
+    <div class="content-group">
+        <h3>(三) 期刊論文</h3>
+        <ul class="data-list">
+            <li>徐美文。〈台灣第一座醫治圖書的醫院〉。《科技報導》346(2010):20-21。</li>
+            <li>徐美文。〈揭開宮內廳書陵部圖書修復及保存的神秘面紗〉。《臺灣博物季刊》(30)3(2011):92-99。</li>
+            <li>徐美文。〈光線對書本的影響-淺談古人與今人曝書〉。《科學月刊》515(2012):856-857。</li>
+            <li>林佳賢，徐美文。〈淺介南方草木狀考補〉。《林業試驗所林業圖書館館訊》17(2015):4。</li>
+            <li>Mei-Wen Hsu. Chiao-Min Lin. “The Use and Restoration of Papers for Archival Preservation—Case Study of National Taiwan Library.” Journal of Literature and Art Studies 8:6(2018): 977-988. doi: 10.17265/2159-5836/2018.06.018.</li>
+            <li>徐美文。〈書籍裝幀與水染藝術〉。《ACT藝術觀點》82(2020):22-27。</li>
+            <li>徐美文、王梅玲。〈日治時期迄今圖書修護三部曲：以臺灣圖書醫院為案例〉。《歷史臺灣》21(2021):129-157。</li>
+        </ul>
+    </div>
+    <div class="content-group">
+        <h3>(四) 會議或研討會論文</h3>
+        <ul class="data-list">
+            <li>徐美文。〈從紙質文獻修復的裱褙作為與不作為-探談台灣歌仔冊金鑲玉之裝幀保存〉。第二屆中華/波蘭美術與文化遺產國際學術研討會論文，國立臺南藝術大學暨國立成功大學，臺南，2014年12月。</li>
+            <li>徐美文。〈國立臺灣圖書館藏品與日常維護〉。雲林科技大學第十六屆文化山海觀「藝‧憶‧意‧繹」文化資產學術研討會論文，2016年。</li>
+            <li>Mei-Wen Hsu, Mei-Ling Wang. “A study on the education of volunteer workers repairing books for the library and their life-long learning.” The 7th Asia-Pacific Conference on Library & Information Education and Practice (A-LIEP, Nanjing, 2016), 50.</li>
+            <li>徐美文。〈清朝康雍乾刷印書籍與開化紙之研究〉。復旦大學開化紙製作工藝及開化紙本文獻國際學術研討會論文。2017年11月。</li>
+            <li>徐美文。〈來本線製書－紙張與中式經典縫法(含實作)〉。中華民國圖書館學會研習論文。2022年7月。</li>
+            <li>徐美文。〈古蘭似海-經典修復技法(含實作)〉。中華民國圖書館學會研習論文。2023年7月。</li>
+            <li>徐美文。〈國立臺灣圖書館修復古蘭經始末〉。國立臺灣圖書館臺灣圖書及檔案文獻保存維護研討會論文。2023年9月。</li>
+            <li>徐美文。〈匠人魂-古蘭經修復之旅〉。海峽兩岸檔案暨微縮學術交流會研討會論文。2025年6月。</li>
+            <li>徐美文。〈日式書籍裝幀：穿越日治時期看裝幀-融入式和本縫法〉。中華民國圖書館學會研習論文。2025年7月。</li>
+        </ul>
+    </div>
+</section>
+
+<section id="media">
+    <h2 class="section-title">媒體採訪</h2>
+    <div class="content-group">
+        <h3>影音紀錄與專題報導 (25項完整紀錄)</h3>
+        <ul class="data-list">
+            <li>2024.05 大愛全紀實：<a class="media-link" href="https://tzuchi.us/zh/blog/taiwan-book-hospital-interview-june-2024" target="_blank">修復古蘭經：百年古蘭經的逆旅</a></li>
+            <li>2023.06 中華文化總會：<a class="media-link" href="https://www.youtube.com/watch?v=wgqvWP7fZwo" target="_blank">匠人魂 — 書籍修復師</a></li>
+            <li>2021.00 國立歷史博物館：〈台灣圖書醫院讓舊籍重生：專治疑難雜症的書醫生〉，《歷史文物》季刊 no.309。</li>
+            <li>2020.10 公視：<a class="media-link" href="https://www.youtube.com/watch?v=hmpB9bom1AQ" target="_blank">「旺來西瓜仙拚仙」【書醫生】節目</a></li>
+            <li>2020.07 大愛探索週報：【藏書與古蘭經】採訪專題。</li>
+            <li>2020.02 國興衛視：<a class="media-link" href="https://www.youtube.com/watch?v=bAVWLzqlPSI" target="_blank">《絕對台灣ぜったい台湾》第47集：神人妙手回春術</a></li>
+            <li>2018.11 民視異言堂：<a class="media-link" href="https://www.youtube.com/watch?v=pVIji-z7gVA" target="_blank">書醫院寂靜的救援</a></li>
+            <li>2018.09 台灣明錶雜誌：<a class="media-link" href="https://www.mingwatch.com/tw/?p=620" target="_blank">書籍修復師拍攝報導 (Ming Watch Taiwan)</a></li>
+            <li>2018.06 大愛電視：<a class="media-link" href="https://www.youtube.com/watch?v=iu2iEEPQImw" target="_blank">【青春愛讀書】在時光中尋字—第三章書的重生</a></li>
+            <li>2018.03 自由時報：<a class="media-link" href="https://news.ltn.com.tw/news/lifeweekly/paper/1182545" target="_blank">【妙職業破解】書醫生，專治書本疑難雜症</a></li>
+            <li>2017.11 影音報導：<a class="media-link" href="https://www.youtube.com/watch?v=jsYw60d9CeY" target="_blank">書醫師妙手回春 專治書本的疑難雜症</a></li>
+            <li>2017.11 影音報導：<a class="media-link" href="https://www.youtube.com/watch?v=DfC1Oj5r4Xk" target="_blank">自己的書自己救 書籍修復DIY一點都不難</a></li>
+            <li>2017.11 影音報導：<a class="media-link" href="https://www.youtube.com/watch?v=pVIji-z7gVA" target="_blank">「書醫生」一雙巧手 專治書本疑難雜症</a></li>
+            <li>2016.03 大愛電視：<a class="media-link" href="https://www.youtube.com/watch?v=iu2iEEPQImw" target="_blank">【青春愛讀書】電視拍攝紀實</a></li>
+            <li>2016.02 聯合報：副刊報導紀實。</li>
+            <li>2016.02 人間福報：<a class="media-link" href="http://www.merit-times.com.tw/NewsPage.aspx?unid=429586" target="_blank">專業書醫生報導</a></li>
+            <li>2016.01 教育廣播電台：專訪紀錄。</li>
+            <li>2015.09 大觀雜誌：書顏巧手話裝訂-館藏圖書修護特展。</li>
+            <li>2015.04 親親文化：出版《和紙玩遊戲》。</li>
+            <li>2014.07 書香遠傳：第114期專訪。</li>
+            <li>2013.03 蘋果日報：副刊採訪報導。</li>
+            <li>2012.01 書香遠傳：第99期專訪。</li>
+            <li>2011.11 自由時報：採訪報導。</li>
+            <li>2011.06 TO’GO泛遊情報：臺灣圖書醫院裝訂室第169期採訪。</li>
+            <li>2009.08 中國時報：10/開卷有書香報導。</li>
+        </ul>
+    </div>
+</section>
+
+<section id="honors" style="background: #fdfdfd;">
+    <h2 class="section-title">專業榮譽</h2>
+    <ul class="data-list">
+        <li>『2010科普閱讀有獎徵文』榮獲物理類優選獎</li>
+    </ul>
+</section>
+
+<section id="cases">
+    <h2 class="section-title">修復案例</h2>
+    <div class="case-placeholder">
+        <p>修復紀錄整理中，即將呈現...</p>
+    </div>
+</section>
+
+<footer>
+    <p>&copy; 2026 徐美文學術研究室 | Hsu Mei-Wen Academic Lab. <br> 學術諮詢與客座邀約：fubefube96@gmail.com</p>
+</footer>
+
+</body>
+</html>
