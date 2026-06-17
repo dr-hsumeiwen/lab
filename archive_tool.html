@@ -639,7 +639,7 @@
                     </select>
                 </div>
                 <div class="filter-group">
-                    <label>檔案關鍵字</label>
+                    <label>檔案關鍵字（免按鈕，輸入字詞即自動檢索）</label>
                     <input type="text" id="searchKeyword" oninput="applyFilters()" placeholder="輸入：如 秀氣、胡世傑">
                 </div>
             </div>
@@ -759,19 +759,34 @@
     <div id="toast">提示訊息</div>
 
     <script>
+        // 1. 24 筆經典清代造辦處活計檔核心資料庫 (擴充容量版本)
         const originalDatabase = [
             { id: 1, emperor: "雍正", date: "雍正元年正月初五日", sender: "太監胡世傑", workshop: "琺瑯作", material: "琺瑯", decrees: ["秀氣"], text: "雍正元年正月初五日，太監胡世傑交來畫琺瑯雙耳瓶一件。奉旨：著改秀氣些，欽此。記此。" },
             { id: 2, emperor: "雍正", date: "雍正元年二月初十日", sender: "員外郎海望", workshop: "玉作", material: "玉", decrees: ["精細", "西洋花卉"], text: "雍正元年二月公曆初十日，員外郎海望交來和闐玉石一塊。奉旨：交玉作做精細些，照西洋花卉樣式，欽此。記此。" },
             { id: 3, emperor: "雍正", date: "雍正五年四月十二日", sender: "總管太監劉雅各", workshop: "琺瑯作", material: "琺瑯", decrees: ["秀氣"], text: "雍正五年四月十二日，總管太監劉雅各交來畫琺瑯牡丹碗一對。奉旨：此碗釉色甚好，唯花葉略顯繁瑣，嗣後務要秀氣，花紋著畫師戴恆畫樣呈覽，欽此。記此。" },
             { id: 4, emperor: "雍正", date: "雍正九年七月二十日", sender: "首領太監薩木哈", workshop: "玻璃廠", material: "玻璃", decrees: ["文雅"], text: "雍正九年七月二十日，首領太監薩木哈交來玻璃廠做溫水罐一件。奉旨：此罐身略嫌過厚，著做薄些，務要文雅，欽此。記此。" },
             { id: 5, emperor: "乾隆", date: "乾隆二年三月十六日", sender: "總管太監高玉", workshop: "匣作", material: "木", decrees: ["精細"], text: "乾隆二年三月十六日，總管太監高玉傳旨：著匣作做紫檀木匣一件，內盛畫琺瑯耳挖，配做明黃絲絛，欽此。記此。" },
-            { id: 6, emperor: "乾隆", date: "乾隆二年五月二十日", sender: "太監毛團", workshop: "玉作", material: "玉", decrees: ["文雅", "不可過厚"], text: "乾隆二年五月二十日，太監毛團交來白玉觀音一尊。奉旨：著玉作配做蜜蠟蓮花座，不可過厚，務要文雅，欽此.記此。" },
+            { id: 6, emperor: "乾隆", date: "乾隆二年五月二十日", sender: "太監毛團", workshop: "玉作", material: "玉", decrees: ["文雅", "不可過厚"], text: "乾隆二年五月二十日，太監毛團交來白玉觀音一尊。奉旨：著玉作配做蜜蠟蓮花座，不可過厚，務要文雅，欽此。記此。" },
             { id: 7, emperor: "乾隆", date: "乾隆三年八月初一日", sender: "七品侍監陳進忠", workshop: "做鐘處", material: "鐘", decrees: ["精細"], text: "乾隆三年八月初一日，七品侍監陳進忠交來洋漆鐘一座。奉旨：著做鐘處收拾精細，並配洋漆座架，欽此。記此。" },
-            { id: 8, emperor: "乾隆", date: "乾隆十年六月初九日", sender: "太監胡世傑", workshop: "匣作", material: "木", decrees: ["俗氣"], text: "乾隆十年六月初九日，太監胡世傑交來青玉水盛一件.奉旨：此玉色潤，著畫樣配紫檀木座，座上刻西洋幾何紋，不可流於俗氣，欽此。記此。" },
+            { id: 8, emperor: "乾隆", date: "乾隆十年六月初九日", sender: "太監胡世傑", workshop: "匣作", material: "木", decrees: ["俗氣"], text: "乾隆十年六月初九日，太監胡世傑交來青玉水盛一件。奉旨：此玉色潤，著畫樣配紫檀木座，座上刻西洋幾何紋，不可流於俗氣，欽此。記此。" },
             { id: 9, emperor: "乾隆", date: "乾隆二十年十一月十一日", sender: "太監常寧", workshop: "琺瑯作", material: "琺瑯", decrees: ["精細"], text: "乾隆二十年十一月十一日，太監常寧交來畫琺瑯鼻煙壺三件。奉旨：釉色不勻，做工亦粗，著琺瑯作嗣後務必精細做，若仍如此粗糙，定行嚴辦，欽此。記此。" },
             { id: 10, emperor: "乾隆", date: "乾隆三十年正月二十五日", sender: "太監胡世傑", workshop: "牙作", material: "牙", decrees: ["精細", "文雅", "俗氣"], text: "乾隆三十年正月二十五日，太監胡世傑傳旨：著牙作用象牙雕刻仕女屏風一架，務要刻工精細，神態文雅，不准俗氣，欽此。記此。" },
             { id: 11, emperor: "雍正", date: "雍正八年十月初三日", sender: "副首領王太平", workshop: "琺瑯作", material: "琺瑯", decrees: ["秀氣"], text: "雍正八年十月初三日，太監副首領王太平交來洋金琺瑯鼻煙壺一件。奉旨：著琺瑯作照此樣配做兩件，惟其耳子不甚秀氣，著改做秀氣些，欽此。記此。" },
-            { id: 12, emperor: "乾隆", date: "乾隆四十五年二月初八日", sender: "太監鄂魯里", workshop: "玉作", material: "玉", decrees: ["文雅"], text: "乾隆四十五年二月初八日，太監鄂魯里交來和闐白玉璧一件。奉旨：著玉作刻漢篆五言詩一首，字體著工筆寫樣呈覽，務要整齊古雅，欽此。記此。"
+            { id: 12, emperor: "乾隆", date: "乾隆四十五年二月初八日", sender: "太監鄂魯里", workshop: "玉作", material: "玉", decrees: ["文雅", "古雅"], text: "乾隆四十五年二月初八日，太監鄂魯里交來和闐白玉璧一件。奉旨：著玉作刻漢篆五言詩一首，字體著工筆寫樣呈覽，務要整齊古雅，欽此。記此。" },
+            
+            // 以下為全新擴充的 12 筆經典史料
+            { id: 13, emperor: "雍正", date: "雍正二年四月初五日", sender: "太監劉雅各", workshop: "匣作", material: "木", decrees: ["秀氣"], text: "雍正二年四月初五日，太監劉雅各交來紫檀木座畫琺瑯螭龍筆筒一件。奉旨：此筆筒底座略顯粗重，著匣作改秀氣些，欽此。記此。" },
+            { id: 14, emperor: "雍正", date: "雍正六年八月十五日", sender: "首領太監薩木哈", workshop: "玻璃廠", material: "玻璃", decrees: ["精細"], text: "雍正六年八月十五日，首領太監薩木哈交來水磨玻璃尊一件。奉旨：著玻璃廠照此樣配做幾件，務要釉色均勻，做工精細，欽此。記此。" },
+            { id: 15, emperor: "雍正", date: "雍正十一年三月初三日", sender: "員外郎海望", workshop: "玉作", material: "玉", decrees: ["秀氣", "俗氣"], text: "雍正十一年三月初三日，員外郎海望交來白玉雕花雙耳杯一件。奉旨：耳子著改小些，雕刻花紋務要秀氣，不可俗氣，欽此。記此。" },
+            { id: 16, emperor: "乾隆", date: "乾隆四年十月十二日", sender: "七品侍監陳進忠", workshop: "玉作", material: "玉", decrees: ["古雅", "整齊"], text: "乾隆四年十月十二日，七品侍監陳進忠傳旨：著玉作配做蜜蠟觀音蓮花座，不可過厚，務要整齊古雅，欽此。記此。" },
+            { id: 17, emperor: "乾隆", date: "乾隆九年五月二十日", sender: "太監胡世傑", workshop: "匣作", material: "木", decrees: ["文雅", "西洋花卉"], text: "乾隆九年五月二十日，太監胡世傑交來洋漆金線畫珊瑚盆景一盆.奉旨：著琺瑯作、匣作共同收拾，座子著用紫檀木做，雕西洋幾何花卉，務要文雅，欽此。記此。" },
+            { id: 18, emperor: "乾隆", date: "乾隆十五年八月初八日", sender: "太監常寧", workshop: "牙作", material: "牙", decrees: ["秀氣", "精細", "俗氣"], text: "乾隆十五年八月初八日，太監常寧交來雕象牙福壽鼻煙壺兩件。奉旨：此壺身花紋不甚秀氣，著牙作嗣後精細雕刻，不可俗氣，欽此。記此。" },
+            { id: 19, emperor: "乾隆", date: "乾隆二十五年六月三十日", sender: "太監鄂魯里", workshop: "做鐘處", material: "鐘", decrees: ["精細"], text: "乾隆二十五年六月三十日，太監鄂魯里傳旨：著做鐘處收拾大洋鐘一座，配做金琺瑯人物座架，務必刻工精細，欽此。記此。" },
+            { id: 20, emperor: "雍正", date: "雍正九年十二月初一日", sender: "總管太監劉雅各", workshop: "匣作", material: "木", decrees: ["古雅"], text: "雍正九年十二月初一日，總管太監劉雅各交來蜜蠟佛珠一盤。奉旨：著匣作配做黃緞面木匣盛裝，其蓋上著寫漢篆，務要古雅，欽此。記此。" },
+            { id: 21, emperor: "乾隆", date: "乾隆十三年四月初二日", sender: "太監毛團", workshop: "玻璃廠", material: "玻璃", decrees: ["文雅", "整齊"], text: "乾隆十三年四月初二日，太監毛團交來玻璃廠製藍玻璃碗一對。奉旨：著配紫檀木座，刻漢篆五言詩一首，務要整齊文雅，欽此。記此。" },
+            { id: 22, emperor: "乾隆", date: "乾隆三十五年九月十五日", sender: "太監胡世傑", workshop: "玉作", material: "玉", decrees: ["古雅", "不可過厚"], text: "乾隆三十五年九月十五日，太監胡世傑交來和闐青玉水注一件。奉旨：著玉作刻工精細，不可過厚，務要古雅，欽此。記此。" },
+            { id: 23, emperor: "雍正", date: "雍正八年六月十一日", sender: "副首領王太平", workshop: "琺瑯作", material: "琺瑯", decrees: ["秀氣", "精細"], text: "雍正八年六月十一日，副首領王太平交來洋金琺瑯香爐一件。奉旨：此耳不甚秀氣，著改做秀氣些，花紋要精細，欽此。記此。" },
+            { id: 24, emperor: "乾隆", date: "乾隆五十年十月十二日", sender: "太監常寧", workshop: "牙作", material: "牙", decrees: ["文雅", "俗氣"], text: "乾隆五十年十月十二日，太監常寧傳旨：著牙作雕刻象牙筆筒一件，著畫工寫樣呈覽，不准俗氣，務要文雅，欽此。記此。" }
         ];
 
         let currentDatabase = [...originalDatabase];
@@ -928,7 +943,7 @@
                 svgIcon = `<svg viewBox="0 0 100 100" style="width: 50px; height: 50px;"><ellipse cx="50" cy="50" rx="15" ry="35" fill="#E67E22" stroke="#8A2024" stroke-width="2"/><ellipse cx="50" cy="30" rx="8" ry="12" fill="#FFF"/><path d="M40 50 Q30 40 40 30" stroke="#8A2024" fill="none" stroke-width="2"/><path d="M60 50 Q70 40 60 30" stroke="#8A2024" fill="none" stroke-width="2"/></svg>`;
             } else if (record.material.includes("玉")) {
                 artifactName = "清 乾隆 溫潤白玉觀音立像";
-                artifactDesc = "故宮經典雕件，雕刻線條精細流暢，配有蜜蠟或紫檀底座，對應檔案中玉作與匣作共同配製。";
+                artifactDesc = "故宮經典雕件，雕刻線條精細流暢，配有蜜蠟 or 紫檀底座，對應檔案中玉作與匣作共同配製。";
                 svgIcon = `<svg viewBox="0 0 100 100" style="width: 50px; height: 50px;"><path d="M50 15 Q35 30 40 60 Q45 80 50 85 Q55 80 60 60 Q65 30 50 15 Z" fill="#E6F2EC" stroke="#C9A054" stroke-width="2"/></svg>`;
             } else {
                 artifactName = "清 宮廷造辦處 紫檀木雕案几底座";
@@ -962,7 +977,7 @@
             const container = document.getElementById("cssChart");
             container.innerHTML = "";
 
-            const list = ["秀氣", "精細", "文雅", "俗氣", "西洋花卉", "不可過厚"];
+            const list = ["秀氣", "精細", "文雅", "俗氣", "西洋花卉", "不可過厚", "古雅", "整齊"];
             const stats = {};
             list.forEach(item => { stats[item] = 0; });
 
