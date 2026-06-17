@@ -8,43 +8,27 @@
     <style>
         :root {
             --primary-color: #1a1a1a;
-            --accent-color: #8d734a; /* 金棕色 */
+            --accent-color: #8d734a;
             --bg-color: #ffffff;
             --section-bg: #fcfcfc;
             --border-color: #eeeeee;
         }
-
         body { font-family: 'Noto Sans TC', sans-serif; color: var(--primary-color); background: var(--bg-color); margin: 0; line-height: 1.8; scroll-behavior: smooth; }
         h1, h2, h3, h4 { font-family: 'Noto Serif TC', serif; font-weight: 700; }
 
-        /* 導覽列：右上角配置與位移 */
-        header {
-            position: fixed; top: 0; width: 100%; background: rgba(255, 255, 255, 0.98);
-            border-bottom: 1px solid var(--border-color); z-index: 1000;
-            display: flex; justify-content: space-between; align-items: center; padding: 1.2rem 8%;
-        }
+        header { position: fixed; top: 0; width: 100%; background: rgba(255, 255, 255, 0.98); border-bottom: 1px solid var(--border-color); z-index: 1000; display: flex; justify-content: space-between; align-items: center; padding: 1.2rem 8%; }
         .logo { font-size: 1.4rem; letter-spacing: 2px; color: var(--primary-color); }
-        nav { display: flex; align-items: center; padding-right: 15%; }
-        nav a { text-decoration: none; color: #555; margin-left: 2rem; font-size: 0.9rem; font-weight: 500; transition: 0.3s; }
+        nav { display: flex; align-items: center; padding-right: 5%; }
+        nav a { text-decoration: none; color: #555; margin-left: 1.5rem; font-size: 0.9rem; font-weight: 500; transition: 0.3s; }
         nav a:hover { color: var(--accent-color); }
 
-        /* 英雄區 */
         .hero { padding: 220px 8% 100px; text-align: center; }
         .hero h1 { font-size: 3.5rem; margin: 0; letter-spacing: 4px; }
         .hero p { font-size: 1.3rem; color: var(--accent-color); margin-top: 15px; font-weight: 500; }
 
-        /* 通用區塊標題 */
         section { padding: 100px 15%; border-bottom: 1px solid var(--border-color); }
-        .section-title { 
-            font-size: 2.2rem; 
-            margin-bottom: 3.5rem; 
-            color: var(--primary-color); 
-            border-left: 6px solid var(--accent-color); 
-            padding-left: 20px;
-            letter-spacing: 1px;
-        }
+        .section-title { font-size: 2.2rem; margin-bottom: 3.5rem; color: var(--primary-color); border-left: 6px solid var(--accent-color); padding-left: 20px; letter-spacing: 1px; }
 
-        /* 內容布局 */
         .content-group { margin-bottom: 60px; }
         .content-group h3 { font-size: 1.5rem; color: var(--accent-color); margin-bottom: 25px; border-bottom: 1px solid #f0f0f0; padding-bottom: 10px; }
         
@@ -56,10 +40,6 @@
         .media-link:hover { color: var(--accent-color); border-color: var(--accent-color); }
 
         footer { padding: 80px; text-align: center; background: #fafafa; font-size: 0.9rem; color: #888; }
-        
-        .case-placeholder {
-            padding: 40px; border: 2px dashed #ddd; text-align: center; color: #aaa; border-radius: 8px;
-        }
     </style>
 </head>
 <body>
@@ -72,6 +52,7 @@
         <a href="#media">媒體採訪</a>
         <a href="#honors">專業榮譽</a>
         <a href="#cases">修復案例</a>
+        <a href="#lab" style="color: var(--accent-color); font-weight: bold;">數位人文分析平台</a>
     </nav>
 </header>
 
@@ -96,20 +77,9 @@
             <li>國立臺北大學 古典文獻學研究所 碩士</li>
         </ul>
     </div>
-    <div class="content-group">
-        <h3>專業經歷與委員會職務</h3>
-        <ul class="data-list">
-            <li>衛福部檔案管理小組 考評委員 / 社家署檔案管理小組 考評委員 (113-114年)</li>
-            <li>台灣電力公司秘書處文物典藏中心 檔案整飭修復諮詢顧問 (113-114年)</li>
-            <li>文化部文化資產局 藝文採購勞務審查委員 / 文物修護職能發展計劃委員 (113-114年)</li>
-            <li>圖書館學會圖書文獻保存修復委員會 委員/副主任委員 (第54、56屆)</li>
-            <li>國立公共資訊圖書館 珍籍修復暨檔案價值鑑定委員</li>
-            
-        </ul>
-    </div>
 </section>
 
-<section id="works" style="background: #fdfdfd;">
+<section id="works" style="background: var(--section-bg);">
     <h2 class="section-title">著作成果</h2>
     <div class="content-group">
         <h3>(一) 專書論文</h3>
@@ -190,7 +160,7 @@
     </div>
 </section>
 
-<section id="honors" style="background: #fdfdfd;">
+<section id="honors" style="background: var(--section-bg);">
     <h2 class="section-title">專業榮譽</h2>
     <ul class="data-list">
         <li>『2010科普閱讀有獎徵文』榮獲物理類優選獎</li>
@@ -199,10 +169,11 @@
 
 <section id="cases">
     <h2 class="section-title">修復案例</h2>
-    <div class="case-placeholder">
-        <p>修復紀錄整理中，即將呈現...</p>
-    </div>
-    <iframe src="https://dr-hsumeiwen.github.io/lab/archive_tool.html?v=3" width="100%" height="800px" frameborder="0"></iframe>
+</section>
+
+<section id="lab" style="background: #fff;">
+    <h2 class="section-title">清代活計檔數位人文分析平台</h2>
+    <iframe src="https://dr-hsumeiwen.github.io/lab/archive_tool.html?v=3" width="100%" height="900px" frameborder="0"></iframe>
 </section>
 
 <footer>
