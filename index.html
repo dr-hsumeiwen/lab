@@ -6,19 +6,19 @@
     <title>徐美文 學術研究室 | Hsu Mei-Wen Academic Lab</title>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;700&family=Noto+Sans+TC:wght@300;500&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --primary-color: #1a1a1a;
-            --accent-color: #8d734a;
-            --bg-color: #ffffff;
-            --section-bg: #fcfcfc;
-            --border-color: #eeeeee;
-        }
+       :root {
+    --primary-color: #4a5f4e;   /* 深炭褐灰（比純黑更柔和，極具人文感） */
+    --accent-color: #8d734a;    /* 老師原本完美的金棕色（保留作為重點色） */
+    --bg-color: #f4f0ea;        /* 🎨 莫蘭迪淺米色（原本純白的地方，現在變這個溫潤的顏色） */
+    --section-bg: #e9e4db;      /* 🎨 莫蘭迪灰米色（交錯區塊，比底色再深一點點的優雅灰米） */
+    --border-color: #ded9d0;    /* 莫蘭迪線條色（淡淡的分割線） */
+}
         body { font-family: 'Noto Sans TC', sans-serif; color: var(--primary-color); background: var(--bg-color); margin: 0; line-height: 1.8; scroll-behavior: smooth; }
         h1, h2, h3, h4 { font-family: 'Noto Serif TC', serif; font-weight: 700; }
 
         header { position: fixed; top: 0; width: 100%; background: rgba(255, 255, 255, 0.98); border-bottom: 1px solid var(--border-color); z-index: 1000; display: flex; justify-content: space-between; align-items: center; padding: 1.2rem 8%; }
         .logo { font-size: 1.4rem; letter-spacing: 2px; color: var(--primary-color); }
-        nav { display: flex; align-items: center; padding-right: 5%; }
+        nav { display: flex; align-items: center; margin-left: auto; padding-right: 15%; }
         nav a { text-decoration: none; color: #555; margin-left: 1.5rem; font-size: 0.9rem; font-weight: 500; transition: 0.3s; }
         nav a:hover { color: var(--accent-color); }
 
@@ -169,9 +169,187 @@
 
 <section id="cases">
     <h2 class="section-title">修復案例</h2>
+    
+    <div class="content-group">
+        <h3>👨‍🏫 徐老師修復案例作品</h3>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-bottom: 50px;">
+            
+            <div style="background: white; border: 1px solid #eee; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.05);">
+                <img src="https://images.unsplash.com/photo-1544947950-fa07a98d237f?w=500" style="width: 100%; height: 200px; object-fit: cover;" alt="古籍修復">
+                <div style="padding: 15px;">
+                    <h4 style="margin: 0 0 10px 0; font-size: 1.1rem; color: #1a1a1a;">清代宮廷珍籍扉頁修復</h4>
+                    <p style="margin: 0; font-size: 0.9rem; color: #666;">運用開化紙與天然植物染料進行托裱修護，完整還原盛清裝幀風貌。</p>
+                </div>
+            </div>
+
+            <div style="background: white; border: 1px solid #eee; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.05);">
+                <img src="https://images.unsplash.com/photo-1589829085413-56de8ae18c73?w=500" style="width: 100%; height: 200px; object-fit: cover;" alt="文獻檔案整飭">
+                <div style="padding: 15px;">
+                    <h4 style="margin: 0 0 10px 0; font-size: 1.1rem; color: #1a1a1a;">百年《古蘭經》重裱與封面加固</h4>
+                    <p style="margin: 0; font-size: 0.9rem; color: #666;">針對蟲蛀與酸化的經書進行寂靜救援，重現經典歷史價值。</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <hr style="border: 0; border-top: 1px dashed #ddd; margin: 40px 0;">
+
+    <div class="content-group">
+        <h3>🎓 歷年課堂學生修復案例</h3>
+        
+        <div style="background: #fbf9f5; padding: 25px; border: 1px dashed #8d734a; border-radius: 8px; margin-bottom: 40px;">
+            <h4 style="margin-top:0; color: #8d734a; font-size: 1.1rem;">📥 學生課堂成果提交（免後台、支援雲端檔案）</h4>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-bottom: 15px;">
+                <div>
+                    <label style="display:block; font-size:0.85rem; margin-bottom:5px;">課堂學年度：</label>
+                    <select id="caseYear" style="width:100%; padding:8px; border:1px solid #ddd; border-radius:4px;">
+                        <option value="2026">2026 年學生課堂修復案例</option>
+                        <option value="2027">2027 年學生課堂修復案例</option>
+                        <option value="2028">2028 年學生課堂修復案例</option>
+                        <option value="2029">2029 年學生課堂修復案例</option>
+                        <option value="2030">2030 年學生課堂修復案例</option>
+                    </select>
+                </div>
+                <div>
+                    <label style="display:block; font-size:0.85rem; margin-bottom:5px;">案例名稱 / 學生姓名：</label>
+                    <input type="text" id="caseTitle" placeholder="如：歌仔冊金鑲玉裝幀修復 - 王大同" style="width:100%; padding:8px; border:1px solid #ddd; border-radius:4px;">
+                </div>
+                <div>
+                    <label style="display:block; font-size:0.85rem; margin-bottom:5px;">上傳成果照片（圖卡封面）：</label>
+                    <input type="file" id="caseImage" accept="image/*" style="width:100%; padding:5px;">
+                </div>
+                <div>
+                    <label style="display:block; font-size:0.85rem; margin-bottom:5px;">完整報告連結 (Word/PPT雲端網址)：</label>
+                    <input type="url" id="caseLink" placeholder="https://drive.google.com/..." style="width:100%; padding:8px; border:1px solid #ddd; border-radius:4px;">
+                </div>
+            </div>
+            <button onclick="uploadCase()" style="background: #8d734a; color: white; border: none; padding: 10px 20px; border-radius: 4px; cursor: pointer; font-weight: bold;">發布成果</button>
+        </div>
+
+        <div style="margin-bottom: 25px; display: flex; flex-wrap: wrap; gap: 10px; border-bottom: 2px solid #eee; padding-bottom: 10px;">
+            <button onclick="filterYear('2026')" id="btn-2026" style="background: #8d734a; color: white; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer; font-weight: 500;">2026 年度</button>
+            <button onclick="filterYear('2027')" id="btn-2027" style="background: #eee; color: #333; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer; font-weight: 500;">2027 年度</button>
+            <button onclick="filterYear('2028')" id="btn-2028" style="background: #eee; color: #333; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer; font-weight: 500;">2028 年度</button>
+            <button onclick="filterYear('2029')" id="btn-2029" style="background: #eee; color: #333; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer; font-weight: 500;">2029 年度</button>
+            <button onclick="filterYear('2030')" id="btn-2030" style="background: #eee; color: #333; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer; font-weight: 500;">2030 年度</button>
+        </div>
+
+        <div id="dynamicCasesList" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 10fr)); gap: 20px;">
+            </div>
+    </div>
 </section>
 
-<section id="lab" style="background: #fff;">
+<script>
+    // 預設顯示 2026 年度的資料
+    let currentSelectYear = '2026';
+    const totalYears = ['2026', '2027', '2028', '2029', '2030'];
+
+    window.addEventListener('DOMContentLoaded', () => {
+        displayLocalCases();
+    });
+
+    function filterYear(year) {
+        currentSelectYear = year;
+        // 切換按鈕顏色樣式
+        totalYears.forEach(y => {
+            const btn = document.getElementById(`btn-${y}`);
+            if(y === year) {
+                btn.style.background = '#8d734a';
+                btn.style.color = 'white';
+            } else {
+                btn.style.background = '#eee';
+                btn.style.color = '#333';
+            }
+        });
+        displayLocalCases();
+    }
+
+    function uploadCase() {
+        const year = document.getElementById('caseYear').value;
+        const title = document.getElementById('caseTitle').value.trim();
+        const imageFile = document.getElementById('caseImage').files[0];
+        const cloudLink = document.getElementById('caseLink').value.trim();
+
+        if (!title || !imageFile) {
+            alert('請填寫案例名稱與姓名，並選擇一張成果照片！');
+            return;
+        }
+
+        const reader = new FileReader();
+        reader.onload = function (e) {
+            const base64Image = e.target.result;
+
+            const newCase = {
+                year: year,
+                title: title,
+                image: base64Image,
+                link: cloudLink,
+                date: new Date().toLocaleDateString()
+            };
+
+            let localCases = JSON.parse(localStorage.getItem('academicLabStudentCases')) || [];
+            localCases.push(newCase);
+            localStorage.setItem('academicLabStudentCases', JSON.stringify(localCases));
+
+            // 重設輸入表單
+            document.getElementById('caseTitle').value = '';
+            document.getElementById('caseImage').value = '';
+            document.getElementById('caseLink').value = '';
+            
+            // 跳轉到剛剛上傳的那個年份查看
+            filterYear(year);
+        };
+        
+        reader.readAsDataURL(imageFile);
+    }
+
+    function displayLocalCases() {
+        const container = document.getElementById('dynamicCasesList');
+        container.innerHTML = '';
+        
+        const localCases = JSON.parse(localStorage.getItem('academicLabStudentCases')) || [];
+        
+        // 篩選出目前選定年份的學生資料
+        const filteredCases = localCases.filter(item => item.year === currentSelectYear);
+
+        if (filteredCases.length === 0) {
+            container.innerHTML = `<div style="padding: 40px; border: 2px dashed #ddd; text-align: center; color: #aaa; border-radius: 8px; grid-column: 1/-1;"><p>目前尚無 ${currentSelectYear} 學年度的上傳案例成果。</p></div>`;
+            return;
+        }
+
+        filteredCases.forEach((item) => {
+            // 尋找該項目在總陣列中的真實 index，以便刪除
+            const realIndex = localCases.findIndex(c => c === item);
+            
+            // 檢查有沒有附上雲端報告連結
+            const linkButton = item.link 
+                ? `<a href="${item.link}" target="_blank" style="display:inline-block; margin-top:10px; color:#8d734a; text-decoration:none; font-weight:500; font-size:0.9rem; border-bottom:1px solid #8d734a;">📂 查看雲端完整報告 (Word/PPT) →</a>` 
+                : '';
+
+            container.innerHTML += `
+                <div style="background: white; border: 1px solid #eee; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.05); position: relative;">
+                    <img src="${item.image}" style="width: 100%; height: 200px; object-fit: cover;">
+                    <div style="padding: 15px;">
+                        <h4 style="margin: 0 0 10px 0; font-size: 1.1rem; color: #1a1a1a;">${item.title}</h4>
+                        <p style="margin: 0; font-size: 0.8rem; color: #888;">📅 上傳日期：${item.date}</p>
+                        ${linkButton}
+                    </div>
+                    <button onclick="deleteCase(${realIndex})" style="position: absolute; top: 10px; right: 10px; background: rgba(255,0,0,0.7); color: white; border: none; border-radius: 50%; width: 25px; height: 25px; cursor: pointer;">×</button>
+                </div>
+            `;
+        });
+    }
+
+    function deleteCase(realIndex) {
+        if(confirm('確定要刪除此項學生成果案例嗎？')) {
+            let localCases = JSON.parse(localStorage.getItem('academicLabStudentCases')) || [];
+            localCases.splice(realIndex, 1);
+            localStorage.setItem('academicLabStudentCases', JSON.stringify(localCases));
+            displayLocalCases();
+        }
+    }
+</script><section id="lab" style="background: #fff;">
     <h2 class="section-title">清代活計檔數位人文分析平台</h2>
     <iframe src="https://dr-hsumeiwen.github.io/lab/archive_tool.html?v=3" width="100%" height="900px" frameborder="0"></iframe>
 </section>
