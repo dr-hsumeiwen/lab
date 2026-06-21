@@ -1152,22 +1152,29 @@ function copyEmbedCode() {
 
 // 【新增】匯出行政矩陣為 CSV
 function exportCSV() {
-    const matrix = generateMatrix(); // 呼叫剛剛的函數
-    let csvContent = "data:text/csv;charset=utf-8,來源,作坊,次數\n";
-    
+    const matrix = generateMatrix();
+    // 這裡直接放字串即可，不需要加 BOM 到字串內容
+    let csvContent = "來源,作坊,次數\n"; 
+
     for (let sender in matrix) {
         for (let workshop in matrix[sender]) {
             csvContent += `${sender},${workshop},${matrix[sender][workshop]}\n`;
         }
     }
+
+    // 將 BOM (Uint8Array) 和內容結合在一起，這是最保險的 UTF-8 方式
+    const bom = new Uint8Array([0xEF, 0xBB, 0xBF]);
+    const blob = new Blob([bom, csvContent], { type: 'text/csv;charset=utf-8;' });
     
-    const encodedUri = encodeURI(csvContent);
+    // 產生下載連結
+    const url = URL.createObjectURL(blob);
     const link = document.createElement("a");
-    link.setAttribute("href", encodedUri);
+    link.setAttribute("href", url);
     link.setAttribute("download", "行政互動矩陣.csv");
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
+    URL.revokeObjectURL(url);
 }
     </script>
 </body>
