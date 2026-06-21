@@ -655,27 +655,43 @@
                 <p style="font-size: 0.75rem; color: var(--text-muted); margin-bottom: 12px; font-family: sans-serif;">您可以讓學生在課堂上找到一段新的活計檔，將其複製到下方，系統將自動解析並加入前端資料庫進行統計！</p>
                 <div class="teacher-grid">
                     <textarea id="rawInputText" rows="3" placeholder="例如：乾隆十年六月初九日，太監胡世傑交來青玉水盛一件。奉旨：著配紫檀木座，不可俗氣，欽此。記此。" style="width: 100%; border: 1px solid #eedec4; padding: 10px; font-size: 0.8rem; border-radius: 4px; resize: none; outline: none;"></textarea>
-                    <div class="teacher-inputs">
-                        <div class="filter-group">
-                            <label>判定皇帝</label>
-                            <select id="newEmperor">
-                                <option value="雍正">雍正朝</option>
-                                <option value="乾隆">乾隆朝</option>
-                            </select>
-                        </div>
-                        <div class="filter-group">
-                            <label>判定作坊</label>
-                            <input type="text" id="newWorkshop" placeholder="如 玉作">
-                        </div>
-                        <div class="filter-group">
-                            <label>判定材料</label>
-                            <input type="text" id="newMaterial" placeholder="如 玉石">
-                        </div>
-                        <div class="filter-group">
-                            <label>風格詞 (半形逗號隔開)</label>
-                            <input type="text" id="newDecrees" placeholder="如 俗氣, 精細">
-                        </div>
-                    </div>
+         <div class="teacher-inputs">
+    	    <div class="filter-group">
+        	<label>判定皇帝</label>
+        	<select id="newEmperor">
+       	     <option value="雍正">雍正朝</option>
+       	     <option value="乾隆">乾隆朝</option>
+        </select>
+   	 </div>
+    	<div class="filter-group">
+    	    <label>判定作坊</label>
+        	<input type="text" id="newWorkshop" placeholder="如 玉作">
+   	 </div>
+    	<div class="filter-group">
+        	<label>作坊匠人</label>
+        	<input type="text" id="newCraftsman" placeholder="如：戴恆">
+    	</div>
+    	<div class="filter-group">
+        <label>經辦太監/官員</label>
+      	  <input type="text" id="newPerson" placeholder="請並列輸入，如：胡世傑, 海望">
+    	</div>
+    	<div class="filter-group">
+        	<label>判定材料</label>
+        	<input type="text" id="newMaterial" placeholder="如 玉石">
+    	</div>
+    	<div class="filter-group">
+        	<label>風格詞 (逗號隔開)</label>
+        	<input type="text" id="newDecrees" placeholder="如 俗氣, 精細">
+    	</div>
+    	<div class="filter-group">
+        	<label>檔案來源</label>
+        	<input type="text" id="newSource" placeholder="如：第12冊, p.34">
+    	</div>
+    	<div class="filter-group">
+        	<label>陳設空間</label>
+       	 <input type="text" id="newSpace" placeholder="如：圓明園">
+    	</div>
+       </div>
                 </div>
                 <div style="display: flex; justify-content: flex-end; margin-top: 15px;">
                     <button onclick="addNewRecord()" class="btn btn-gold" style="font-size: 0.75rem; padding: 6px 15px;">📥 解析並導入資料庫</button>
