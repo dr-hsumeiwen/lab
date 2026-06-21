@@ -1,1197 +1,363 @@
 <!DOCTYPE html>
-<html lang="zh-TW">
+<html lang="zh-Hant">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>清代內務府造辦處活計檔數位格物平台 | 徐美文教授數位人文研究室</title>
+    <title>徐美文 學術研究室 | Hsu Mei-Wen Academic Lab</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;700&family=Noto+Sans+TC:wght@300;500&display=swap" rel="stylesheet">
     <style>
-        /* 1. 核心字體與宮廷古典美學配色 */
-        @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;700&display=swap');
+       :root {
+    --primary-color: #4a5f4e;   /* 深炭褐灰（比純黑更柔和，極具人文感） */
+    --accent-color: #8d734a;    /* 老師原本完美的金棕色（保留作為重點色） */
+    --bg-color: #f4f0ea;        /* 🎨 莫蘭迪淺米色（原本純白的地方，現在變這個溫潤的顏色） */
+    --section-bg: #e9e4db;      /* 🎨 莫蘭迪灰米色（交錯區塊，比底色再深一點點的優雅灰米） */
+    --border-color: #ded9d0;    /* 莫蘭迪線條色（淡淡的分割線） */
+}
+        body { font-family: 'Noto Sans TC', sans-serif; color: var(--primary-color); background: var(--bg-color); margin: 0; line-height: 1.8; scroll-behavior: smooth; }
+        h1, h2, h3, h4 { font-family: 'Noto Serif TC', serif; font-weight: 700; }
+
+        header { position: fixed; top: 0; width: 100%; background: rgba(255, 255, 255, 0.98); border-bottom: 1px solid var(--border-color); z-index: 1000; display: flex; justify-content: space-between; align-items: center; padding: 1.2rem 8%; }
+        .logo { font-size: 1.4rem; letter-spacing: 2px; color: var(--primary-color); }
+        nav { display: flex; align-items: center; margin-left: auto; padding-right: 15%; }
+        nav a { text-decoration: none; color: #555; margin-left: 1.5rem; font-size: 0.9rem; font-weight: 500; transition: 0.3s; }
+        nav a:hover { color: var(--accent-color); }
+
+        .hero { padding: 220px 8% 100px; text-align: center; }
+        .hero h1 { font-size: 3.5rem; margin: 0; letter-spacing: 4px; }
+        .hero p { font-size: 1.3rem; color: var(--accent-color); margin-top: 15px; font-weight: 500; }
+
+        section { padding: 100px 15%; border-bottom: 1px solid var(--border-color); }
+        .section-title { font-size: 2.2rem; margin-bottom: 3.5rem; color: var(--primary-color); border-left: 6px solid var(--accent-color); padding-left: 20px; letter-spacing: 1px; }
+
+        .content-group { margin-bottom: 60px; }
+        .content-group h3 { font-size: 1.5rem; color: var(--accent-color); margin-bottom: 25px; border-bottom: 1px solid #f0f0f0; padding-bottom: 10px; }
         
-        :root {
-            --bg-color: #fdfbf7;       /* 溫雅宣紙白 */
-            --panel-bg: #f7f4ef;       /* 暖白 */
-            --primary-red: #8a2024;    /* 宮廷硃紅 */
-            --primary-red-hover: #6b181b;
-            --ochre-gold: #c9a054;     /* 溫潤金 */
-            --text-dark: #2c3e50;
-            --text-muted: #7f8c8d;
-            --card-shadow: 0 4px 12px rgba(138, 32, 36, 0.05);
-        }
+        ul.data-list { list-style: none; padding: 0; }
+        ul.data-list li { margin-bottom: 15px; position: relative; padding-left: 25px; font-size: 1.05rem; text-align: justify; }
+        ul.data-list li::before { content: "▪"; position: absolute; left: 0; color: var(--accent-color); }
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+        .media-link { color: var(--primary-color); text-decoration: none; font-weight: 500; border-bottom: 1px solid #ddd; transition: 0.3s; }
+        .media-link:hover { color: var(--accent-color); border-color: var(--accent-color); }
 
-        body {
-            font-family: 'Noto Serif TC', 'Georgia', 'Microsoft JhengHei', serif;
-            background-color: var(--bg-color);
-            color: var(--text-dark);
-            line-height: 1.6;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-        }
-
-        /* 2. 導覽列與橫幅 */
-        header {
-            background-color: var(--primary-red);
-            color: white;
-            padding: 20px 0;
-            border-bottom: 4px solid var(--ochre-gold);
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-            width: 100%;
-        }
-
-        .header-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 15px;
-        }
-
-        .logo-area {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .logo-icon {
-            font-size: 2rem;
-        }
-
-        .logo-text h1 {
-            font-size: 1.5rem;
-            font-weight: 700;
-            letter-spacing: 1px;
-        }
-
-        .logo-text p {
-            font-size: 0.7rem;
-            font-family: sans-serif;
-            letter-spacing: 2px;
-            color: #f5d6a7;
-            margin-top: 2px;
-        }
-
-        .back-btn {
-            background-color: #551315;
-            color: var(--ochre-gold);
-            border: 1px solid var(--ochre-gold);
-            padding: 8px 16px;
-            border-radius: 4px;
-            text-decoration: none;
-            font-size: 0.85rem;
-            font-family: sans-serif;
-            transition: all 0.3s ease;
-        }
-
-        .back-btn:hover {
-            background-color: var(--ochre-gold);
-            color: white;
-        }
-
-        .banner {
-            background: linear-gradient(135deg, #551315 0%, var(--primary-red) 100%);
-            color: white;
-            padding: 40px 0;
-            border-bottom: 1px solid rgba(201, 160, 84, 0.2);
-        }
-
-        .banner-tag {
-            display: inline-block;
-            background-color: rgba(201, 160, 84, 0.2);
-            color: var(--ochre-gold);
-            padding: 4px 12px;
-            border-radius: 50px;
-            font-size: 0.75rem;
-            font-family: sans-serif;
-            font-weight: bold;
-            margin-bottom: 12px;
-            border: 1px solid rgba(201, 160, 84, 0.3);
-        }
-
-        .banner p {
-            font-size: 1.1rem;
-            max-width: 800px;
-            color: #f7f4ef;
-        }
-
-        /* 3. 數據看板 */
-        .dashboard {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 20px;
-            margin: 30px auto 0 auto;
-        }
-
-        .stat-card {
-            background-color: white;
-            padding: 20px;
-            border-radius: 8px;
-            border: 1px solid #eee;
-            text-align: center;
-            box-shadow: var(--card-shadow);
-        }
-
-        .stat-title {
-            font-size: 0.8rem;
-            color: var(--text-muted);
-            font-family: sans-serif;
-            margin-bottom: 5px;
-        }
-
-        .stat-value {
-            font-size: 2.2rem;
-            font-weight: 700;
-        }
-
-        .color-red { color: var(--primary-red); }
-        .color-gold { color: var(--ochre-gold); }
-
-        /* 4. 篩選控制面板 */
-        .control-panel {
-            background-color: white;
-            padding: 24px;
-            border-radius: 8px;
-            border: 1px solid #eedec4;
-            box-shadow: var(--card-shadow);
-            margin-top: 30px;
-        }
-
-        .filter-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: 15px;
-        }
-
-        .filter-group label {
-            display: block;
-            font-size: 0.75rem;
-            color: var(--text-muted);
-            margin-bottom: 5px;
-            font-family: sans-serif;
-        }
-
-        .filter-group select, .filter-group input {
-            width: 100%;
-            padding: 8px 12px;
-            border: 1px solid #eedec4;
-            background-color: #fdfdfb;
-            border-radius: 4px;
-            font-size: 0.85rem;
-            font-family: sans-serif;
-            color: var(--text-dark);
-            outline: none;
-            transition: border-color 0.3s;
-        }
-
-        .filter-group select:focus, .filter-group input:focus {
-            border-color: var(--primary-red);
-        }
-
-        .button-group {
-            display: flex;
-            gap: 10px;
-            margin-top: 20px;
-            justify-content: flex-end;
-            flex-wrap: wrap;
-        }
-
-        .btn {
-            padding: 10px 20px;
-            font-size: 0.85rem;
-            border-radius: 4px;
-            border: none;
-            cursor: pointer;
-            font-family: sans-serif;
-            transition: all 0.3s;
-        }
-
-        .btn-gold {
-            background-color: var(--ochre-gold);
-            color: white;
-        }
-
-        .btn-gold:hover {
-            background-color: var(--ochre-gold);
-            filter: brightness(0.9);
-        }
-
-        .btn-outline {
-            background-color: transparent;
-            border: 1px solid var(--primary-red);
-            color: var(--primary-red);
-        }
-
-        .btn-outline:hover {
-            background-color: #fdf3f3;
-        }
-
-        /* 教師自建庫 */
-        .teacher-panel {
-            margin-top: 20px;
-            padding-top: 20px;
-            border-top: 1px dashed #eedec4;
-            background-color: #fbf9f5;
-            padding: 15px;
-            border-radius: 6px;
-        }
-
-        .teacher-title {
-            font-size: 0.9rem;
-            font-weight: bold;
-            color: var(--primary-red);
-            margin-bottom: 10px;
-        }
-
-        .teacher-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 15px;
-        }
-
-        @media (min-width: 768px) {
-            .teacher-grid {
-                grid-template-columns: 1.5fr 1fr;
-            }
-        }
-
-        .teacher-inputs {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-        }
-
-        /* 5. 左右分欄主顯示區 */
-        .main-layout {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 30px;
-            margin-top: 30px;
-            margin-bottom: 50px;
-        }
-
-        @media (min-width: 992px) {
-            .main-layout {
-                grid-template-columns: 2fr 1fr;
-            }
-        }
-
-        /* 左側檔案卡片 */
-        .archives-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 2px solid #eedec4;
-            padding-bottom: 8px;
-            margin-bottom: 15px;
-        }
-
-        .archives-header h3 {
-            color: var(--primary-red);
-            font-size: 1.2rem;
-        }
-
-        .archives-scroll-box {
-            max-height: 600px;
-            overflow-y: auto;
-            padding-right: 8px;
-        }
-
-        .archive-card {
-            background-color: white;
-            padding: 20px;
-            border-radius: 6px;
-            border: 1px solid #eee;
-            margin-bottom: 15px;
-            cursor: pointer;
-            transition: all 0.3s;
-            border-left: 4px solid var(--ochre-gold);
-            box-shadow: var(--card-shadow);
-        }
-
-        .archive-card:hover {
-            transform: translateY(-2px);
-        }
-
-        .archive-card.active {
-            border-left: 8px solid var(--primary-red);
-            background-color: #fdf5f5;
-        }
-
-        .card-meta {
-            display: flex;
-            justify-content: space-between;
-            font-size: 0.75rem;
-            color: var(--text-muted);
-            margin-bottom: 10px;
-            font-family: sans-serif;
-        }
-
-        .emperor-badge {
-            background-color: var(--primary-red);
-            color: white;
-            padding: 2px 6px;
-            border-radius: 3px;
-        }
-
-        .card-text {
-            font-size: 0.95rem;
-            line-height: 1.7;
-            margin-bottom: 15px;
-        }
-
-        .card-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-        }
-
-        .badge {
-            font-size: 0.75rem;
-            padding: 2px 8px;
-            border-radius: 4px;
-            font-family: sans-serif;
-            font-weight: bold;
-        }
-
-        .badge-ws { background-color: #eedec4; color: #8a6421; }
-        .badge-mat { background-color: #fce4ec; color: #c2185b; }
-        .badge-dec { background-color: #e8f5e9; color: #2e7d32; }
-
-        /* 右側加值分析面板 */
-        .tab-box {
-            background-color: white;
-            border-radius: 8px;
-            border: 1px solid #eee;
-            box-shadow: var(--card-shadow);
-            overflow: hidden;
-        }
-
-        .tab-headers {
-            display: flex;
-            background-color: #f5f0e6;
-            border-bottom: 1px solid #eedec4;
-        }
-
-        .tab-btn {
-            flex: 1;
-            padding: 12px 5px;
-            background: none;
-            border: none;
-            cursor: pointer;
-            font-family: sans-serif;
-            font-size: 0.85rem;
-            font-weight: bold;
-            color: var(--text-muted);
-            text-align: center;
-            transition: all 0.3s;
-        }
-
-        .tab-btn.active {
-            background-color: white;
-            color: var(--primary-red);
-            border-bottom: 3px solid var(--primary-red);
-        }
-
-        .tab-content {
-            padding: 20px;
-            min-height: 350px;
-        }
-
-        /* 手繪級 CSS 長條圖 */
-        .css-chart-container {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            margin-top: 15px;
-        }
-
-        .chart-row {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .chart-label {
-            width: 80px;
-            font-size: 0.8rem;
-            font-family: sans-serif;
-            font-weight: bold;
-            text-align: right;
-        }
-
-        .chart-bar-bg {
-            flex-grow: 1;
-            background-color: #eee;
-            height: 18px;
-            border-radius: 9px;
-            overflow: hidden;
-            position: relative;
-        }
-
-        .chart-bar-fill {
-            background-color: var(--primary-red);
-            height: 100%;
-            width: 0%; 
-            border-radius: 9px;
-            transition: width 0.6s ease-out;
-        }
-
-        .chart-value {
-            width: 30px;
-            font-size: 0.8rem;
-            font-family: sans-serif;
-            font-weight: bold;
-            color: var(--primary-red);
-        }
-
-        /* 外交與文獻解構 */
-        .diplo-item {
-            background-color: #faf8f5;
-            padding: 10px 12px;
-            border-radius: 4px;
-            border-left: 3px solid var(--ochre-gold);
-            margin-bottom: 10px;
-            font-size: 0.8rem;
-            font-family: sans-serif;
-        }
-
-        .diplo-title {
-            font-weight: bold;
-            color: var(--primary-red);
-            margin-bottom: 3px;
-        }
-
-        /* 故宮文物 */
-        .museum-card {
-            background-color: #fbf9f5;
-            padding: 15px;
-            border-radius: 6px;
-            border: 1px dashed #eedec4;
-            text-align: center;
-        }
-
-        .museum-img-placeholder {
-            width: 80px;
-            height: 80px;
-            margin: 0 auto 12px auto;
-            background-color: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border: 1px solid #eedec4;
-        }
-
-        /* 提示卡 */
-        .prompt-card {
-            background-color: rgba(201, 160, 84, 0.1);
-            border: 1px solid rgba(201, 160, 84, 0.25);
-            padding: 20px;
-            border-radius: 8px;
-            margin-top: 20px;
-        }
-
-        .prompt-card h4 {
-            color: #a87e2a;
-            font-size: 0.9rem;
-            margin-bottom: 8px;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        .prompt-card ul {
-            font-size: 0.75rem;
-            font-family: sans-serif;
-            padding-left: 15px;
-        }
-
-        .prompt-card li {
-            margin-bottom: 8px;
-            color: #5d523c;
-        }
-
-        /* 頁腳 */
-        footer {
-            background-color: #2c1a1b;
-            color: #dcd1c4;
-            text-align: center;
-            padding: 25px 0;
-            margin-top: auto;
-            border-top: 4px solid var(--ochre-gold);
-            font-size: 0.75rem;
-            font-family: sans-serif;
-        }
-
-        /* 通知 */
-        #toast {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background-color: #333;
-            color: white;
-            padding: 12px 24px;
-            border-radius: 4px;
-            font-size: 0.8rem;
-            font-family: sans-serif;
-            display: none;
-            z-index: 1000;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-        }
-
-        /* 輔助隱藏 */
-        .hidden { display: none !important; }
+        footer { padding: 80px; text-align: center; background: #fafafa; font-size: 0.9rem; color: #888; }
     </style>
 </head>
 <body>
 
-    <!-- 頂部學術導覽列 -->
-    <header>
-        <div class="container header-content">
-            <div class="logo-area">
-                <span class="logo-icon">📜</span>
-                <div class="logo-text">
-                    <h1>清代內務府造辦處活計檔數位格物平台</h1>
-                    <p>DR. HSU MEI-WEN'S DIGITAL HUMANITIES & ARCHIVES LAB</p>
-                </div>
-            </div>
-            <a href="https://dr-hsumeiwen.github.io/lab/" class="back-btn">返回實驗室首頁 ↗</a>
-        </div>
-    </header>
+<header>
+    <div class="logo">徐美文 學術研究室</div>
+    <nav>
+        <a href="#about">學經歷</a>
+        <a href="#works">著作成果</a>
+        <a href="#media">媒體採訪</a>
+        <a href="#honors">專業榮譽</a>
+        <a href="#cases">修復案例</a>
+        <a href="#lab" style="color: var(--accent-color); font-weight: bold;">數位人文分析平台</a>
+    </nav>
+</header>
 
-    <!-- 平台主橫幅 -->
-    <section class="banner">
-        <div class="container">
-            <span class="banner-tag">圖書資訊與檔案學研究所 · 課程專用工具</span>
-            <p>本平台將清代「半結構化」的流水帳式活計檔原始文本，轉化為具備「後設資料欄位」、「外交學公文關係」與「帝王美學量化分析」的數位人文知識庫。</p>
-        </div>
-    </section>
+<section class="hero">
+    <h1>Hsu Mei-Wen, Ph.D.</h1>
+    <p>紙質文物修復專家 · 清代文獻檔案研究者</p>
+</section>
 
-    <!-- 主體內容 -->
-    <div class="container flex-grow">
-        
-        <!-- 數據看板 (Dashboard) -->
-        <div class="dashboard">
-            <div class="stat-card">
-                <div class="stat-title">總收錄案件</div>
-                <div class="stat-value color-red" id="totalRecords">0</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-title">涉入工藝材料</div>
-                <div class="stat-value color-gold" id="totalMaterials">0</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-title">承辦核心作坊</div>
-                <div class="stat-value color-red" id="totalWorkshops">0</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-title">美學風格指示數</div>
-                <div class="stat-value color-gold" id="totalDecrees">0</div>
-            </div>
-        </div>
-
-        <!-- 檔案控制與篩選面板 -->
-        <div class="control-panel">
-            <div class="filter-grid">
-                <div class="filter-group">
-                    <label>朝代帝王</label>
-                    <select id="filterEmperor" onchange="applyFilters()">
-                        <option value="all">全部皇帝</option>
-                        <option value="雍正">雍正朝</option>
-                        <option value="乾隆">乾隆朝</option>
-                    </select>
-                </div>
-                <div class="filter-group">
-                    <label>承辦作坊</label>
-                    <select id="filterWorkshop" onchange="applyFilters()">
-                        <option value="all">全部作坊</option>
-                        <option value="琺瑯作">琺瑯作</option>
-                        <option value="玉作">玉作</option>
-                        <option value="匣作">匣作</option>
-                        <option value="做鐘處">做鐘處</option>
-                        <option value="牙作">牙作</option>
-                        <option value="玻璃廠">玻璃廠</option>
-                    </select>
-                </div>
-                <div class="filter-group">
-                    <label>工藝材料</label>
-                    <select id="filterMaterial" onchange="applyFilters()">
-                        <option value="all">全部材料</option>
-                        <option value="琺瑯">琺瑯</option>
-                        <option value="玉">玉石/和闐玉</option>
-                        <option value="木">紫檀木/木材</option>
-                        <option value="蜜蠟">蜜蠟</option>
-                        <option value="玻璃">玻璃</option>
-                        <option value="鐘">洋漆鐘</option>
-                        <option value="牙">象牙</option>
-                    </select>
-                </div>
-                <div class="filter-group">
-                    <label>檔案關鍵字（免按鈕，輸入字詞即自動檢索）</label>
-                    <input type="text" id="searchKeyword" oninput="applyFilters()" placeholder="輸入：如 秀氣、胡世傑">
-                </div>
-            </div>
-
-            <div class="button-group">
-                <button onclick="toggleTeacherPanel()" class="btn btn-gold">⚙️ 課堂互動自建庫</button>
-                <button onclick="copyEmbedCode()" class="btn btn-outline">📋 複製嵌入代碼</button><button onclick="exportCSV()" class="btn btn-outline">📊 匯出行政矩陣 (CSV)</button>
-            </div>
-
-            <!-- 教師自建庫面板 -->
-            <div id="teacherPanel" class="teacher-panel hidden">
-                <div class="teacher-title">🎓 課堂互動教學：即時錄入新檔案</div>
-                <p style="font-size: 0.75rem; color: var(--text-muted); margin-bottom: 12px; font-family: sans-serif;">您可以讓學生在課堂上找到一段新的活計檔，將其複製到下方，系統將自動解析並加入前端資料庫進行統計！</p>
-                <div class="teacher-grid">
-                    <textarea id="rawInputText" rows="3" placeholder="例如：乾隆十年六月初九日，太監胡世傑交來青玉水盛一件。奉旨：著配紫檀木座，不可俗氣，欽此。記此。" style="width: 100%; border: 1px solid #eedec4; padding: 10px; font-size: 0.8rem; border-radius: 4px; resize: none; outline: none;"></textarea>
-         <div class="teacher-inputs">
-    	    <div class="filter-group">
-        	<label>判定皇帝</label>
-        	<select id="newEmperor">
-       	     <option value="雍正">雍正朝</option>
-       	     <option value="乾隆">乾隆朝</option>
-        </select>
-   	 </div>
-    	<div class="filter-group">
-    	    <label>判定作坊</label>
-        	<input type="text" id="newWorkshop" placeholder="如 玉作">
-   	 </div>
-    	<div class="filter-group">
-        	<label>作坊匠人</label>
-        	<input type="text" id="newCraftsman" placeholder="如：戴恆">
-    	</div>
-    	<div class="filter-group">
-        <label>經辦太監/官員</label>
-      	  <input type="text" id="newPerson" placeholder="請並列輸入，如：胡世傑, 海望">
-    	</div>
-    	<div class="filter-group">
-        	<label>判定材料</label>
-        	<input type="text" id="newMaterial" placeholder="如 玉石">
-    	</div>
-    	<div class="filter-group">
-        	<label>風格詞 (逗號隔開)</label>
-        	<input type="text" id="newDecrees" placeholder="如 俗氣, 精細">
-    	</div>
-    	<div class="filter-group">
-        	<label>檔案來源</label>
-        	<input type="text" id="newSource" placeholder="如：第12冊, p.34">
-    	</div>
-    	<div class="filter-group">
-        	<label>陳設空間</label>
-       	 <input type="text" id="newSpace" placeholder="如：圓明園">
-    	</div>
-       </div>
-                </div>
-                <div style="display: flex; justify-content: flex-end; margin-top: 15px;">
-                    <button onclick="addNewRecord()" class="btn btn-gold" style="font-size: 0.75rem; padding: 6px 15px;">📥 解析並導入資料庫</button>
-                </div>
-            </div>
-        </div>
-
-        <!-- 左右顯示版面 -->
-        <div class="main-layout">
-            
-            <!-- 左側：檔案清單 -->
-            <div>
-                <div class="archives-header">
-                    <h3>📖 結構化檔案列表 (<span id="matchCount">0</span> 件)</h3>
-                </div>
-                <div class="archives-scroll-box" id="archivesListContainer">
-                    <!-- 動態卡片 -->
-                </div>
-            </div>
-
-            <!-- 右側：分析面板 -->
-            <div style="display: flex; flex-direction: column; gap: 20px;">
-                
-                <div class="tab-box">
-                    <div class="tab-headers">
-                        <button onclick="switchTab('chart')" id="tabBtn-chart" class="tab-btn active">📊 旨意統計</button>
-                        <button onclick="switchTab('diplomatic')" id="tabBtn-diplomatic" class="tab-btn">🏛️ 外交學解構</button>
-                        <button onclick="switchTab('museum')" id="tabBtn-museum" class="tab-btn">🏺 故宮關聯</button>
-                    </div>
-
-                    <div class="tab-content">
-                        <!-- Tab 1: 原生 CSS 長條圖 -->
-                        <div id="tabContent-chart">
-                            <p style="font-size: 0.75rem; color: var(--text-muted); font-family: sans-serif; margin-bottom: 15px;">皇帝工藝指示美學詞頻統計：</p>
-                            <div class="css-chart-container" id="cssChart">
-                                <!-- 動態圖表 -->
-                            </div>
-                        </div>
-
-                        <!-- Tab 2: 外交學解構 -->
-                        <div id="tabContent-diplomatic" class="hidden">
-                            <div id="diplomaticDetail">
-                                <p style="color: var(--text-muted); text-align: center; padding-top: 50px; font-family: sans-serif; font-size: 0.8rem;">請點擊左側檔案卡片進行解構...</p>
-                            </div>
-                        </div>
-
-                        <!-- Tab 3: 故宮關聯 -->
-                        <div id="tabContent-museum" class="hidden">
-                            <div id="museumDetail">
-                                <p style="color: var(--text-muted); text-align: center; padding-top: 50px; font-family: sans-serif; font-size: 0.8rem;">請選擇左側檔案，檢索故宮藏品對應...</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 思考提示 -->
-                <div class="prompt-card">
-                    <h4><span>💡</span> 研討會/課堂思考</h4>
-                    <ul>
-                        <li><strong>全宗與來源原則：</strong>「交來」者多為太監，這如何揭示清代內廷行政的層級化資訊流動？</li>
-                        <li><strong>美學詞彙控制：</strong>雍正朝「文雅」、乾隆朝「精細」的詞頻轉變，如何呼應兩朝藝術風格的演變？</li>
-                        <li><strong>數位加值界限：</strong>量化數據能完美取代傳統考證嗎？檔案學中的脈絡原貌在數位化中如何守護？</li>
-                    </ul>
-                </div>
-
-            </div>
-
-        </div>
-
+<section id="about">
+    <h2 class="section-title">學經歷</h2>
+    <div class="content-group">
+        <h3>國際講學經歷</h3>
+        <ul class="data-list">
+            <li>2017年 香港大學專業進修「古籍維護與修護工作坊」講師</li>
+            <li>2019年 馬來西亞新山南方大學短期文化資產維護課程講師</li>
+        </ul>
     </div>
-
-    <!-- 頁腳 -->
-    <footer>
-        <div class="container">
-            <p>© 2026 國立圖書資訊與檔案學研究所 · 徐美文教授數位人文研究室</p>
-            <p style="color: #8c7d6c; margin-top: 5px;">本工具使用原生前端技術，免租用後端，100% 適應嚴格防火牆環境</p>
-        </div>
-    </footer>
-
-    <!-- 提示條 -->
-    <div id="toast">提示訊息</div>
-
-    <script>
-        // 1. 24 筆經典清代造辦處活計檔核心資料庫 (擴充容量版本)
-        const originalDatabase = [
-            { id: 1, emperor: "雍正", date: "雍正元年正月初五日", sender: "太監胡世傑", workshop: "琺瑯作", material: "琺瑯", decrees: ["秀氣"], text: "雍正元年正月初五日，太監胡世傑交來畫琺瑯雙耳瓶一件。奉旨：著改秀氣些，欽此。記此。" },
-            { id: 2, emperor: "雍正", date: "雍正元年二月初十日", sender: "員外郎海望", workshop: "玉作", material: "玉", decrees: ["精細", "西洋花卉"], text: "雍正元年二月公曆初十日，員外郎海望交來和闐玉石一塊。奉旨：交玉作做精細些，照西洋花卉樣式，欽此。記此。" },
-            { id: 3, emperor: "雍正", date: "雍正五年四月十二日", sender: "總管太監劉雅各", workshop: "琺瑯作", material: "琺瑯", decrees: ["秀氣"], text: "雍正五年四月十二日，總管太監劉雅各交來畫琺瑯牡丹碗一對。奉旨：此碗釉色甚好，唯花葉略顯繁瑣，嗣後務要秀氣，花紋著畫師戴恆畫樣呈覽，欽此。記此。" },
-            { id: 4, emperor: "雍正", date: "雍正九年七月二十日", sender: "首領太監薩木哈", workshop: "玻璃廠", material: "玻璃", decrees: ["文雅"], text: "雍正九年七月二十日，首領太監薩木哈交來玻璃廠做溫水罐一件。奉旨：此罐身略嫌過厚，著做薄些，務要文雅，欽此。記此。" },
-            { id: 5, emperor: "乾隆", date: "乾隆二年三月十六日", sender: "總管太監高玉", workshop: "匣作", material: "木", decrees: ["精細"], text: "乾隆二年三月十六日，總管太監高玉傳旨：著匣作做紫檀木匣一件，內盛畫琺瑯耳挖，配做明黃絲絛，欽此。記此。" },
-            { id: 6, emperor: "乾隆", date: "乾隆二年五月二十日", sender: "太監毛團", workshop: "玉作", material: "玉", decrees: ["文雅", "不可過厚"], text: "乾隆二年五月二十日，太監毛團交來白玉觀音一尊。奉旨：著玉作配做蜜蠟蓮花座，不可過厚，務要文雅，欽此。記此。" },
-            { id: 7, emperor: "乾隆", date: "乾隆三年八月初一日", sender: "七品侍監陳進忠", workshop: "做鐘處", material: "鐘", decrees: ["精細"], text: "乾隆三年八月初一日，七品侍監陳進忠交來洋漆鐘一座。奉旨：著做鐘處收拾精細，並配洋漆座架，欽此。記此。" },
-            { id: 8, emperor: "乾隆", date: "乾隆十年六月初九日", sender: "太監胡世傑", workshop: "匣作", material: "木", decrees: ["俗氣"], text: "乾隆十年六月初九日，太監胡世傑交來青玉水盛一件。奉旨：此玉色潤，著畫樣配紫檀木座，座上刻西洋幾何紋，不可流於俗氣，欽此。記此。" },
-            { id: 9, emperor: "乾隆", date: "乾隆二十年十一月十一日", sender: "太監常寧", workshop: "琺瑯作", material: "琺瑯", decrees: ["精細"], text: "乾隆二十年十一月十一日，太監常寧交來畫琺瑯鼻煙壺三件。奉旨：釉色不勻，做工亦粗，著琺瑯作嗣後務必精細做，若仍如此粗糙，定行嚴辦，欽此。記此。" },
-            { id: 10, emperor: "乾隆", date: "乾隆三十年正月二十五日", sender: "太監胡世傑", workshop: "牙作", material: "牙", decrees: ["精細", "文雅", "俗氣"], text: "乾隆三十年正月二十五日，太監胡世傑傳旨：著牙作用象牙雕刻仕女屏風一架，務要刻工精細，神態文雅，不准俗氣，欽此。記此。" },
-            { id: 11, emperor: "雍正", date: "雍正八年十月初三日", sender: "副首領王太平", workshop: "琺瑯作", material: "琺瑯", decrees: ["秀氣"], text: "雍正八年十月初三日，太監副首領王太平交來洋金琺瑯鼻煙壺一件。奉旨：著琺瑯作照此樣配做兩件，惟其耳子不甚秀氣，著改做秀氣些，欽此。記此。" },
-            { id: 12, emperor: "乾隆", date: "乾隆四十五年二月初八日", sender: "太監鄂魯里", workshop: "玉作", material: "玉", decrees: ["文雅", "古雅"], text: "乾隆四十五年二月初八日，太監鄂魯里交來和闐白玉璧一件。奉旨：著玉作刻漢篆五言詩一首，字體著工筆寫樣呈覽，務要整齊古雅，欽此。記此。" },
-            
-            // 以下為全新擴充的 12 筆經典史料
-            { id: 13, emperor: "雍正", date: "雍正二年四月初五日", sender: "太監劉雅各", workshop: "匣作", material: "木", decrees: ["秀氣"], text: "雍正二年四月初五日，太監劉雅各交來紫檀木座畫琺瑯螭龍筆筒一件。奉旨：此筆筒底座略顯粗重，著匣作改秀氣些，欽此。記此。" },
-            { id: 14, emperor: "雍正", date: "雍正六年八月十五日", sender: "首領太監薩木哈", workshop: "玻璃廠", material: "玻璃", decrees: ["精細"], text: "雍正六年八月十五日，首領太監薩木哈交來水磨玻璃尊一件。奉旨：著玻璃廠照此樣配做幾件，務要釉色均勻，做工精細，欽此。記此。" },
-            { id: 15, emperor: "雍正", date: "雍正十一年三月初三日", sender: "員外郎海望", workshop: "玉作", material: "玉", decrees: ["秀氣", "俗氣"], text: "雍正十一年三月初三日，員外郎海望交來白玉雕花雙耳杯一件。奉旨：耳子著改小些，雕刻花紋務要秀氣，不可俗氣，欽此。記此。" },
-            { id: 16, emperor: "乾隆", date: "乾隆四年十月十二日", sender: "七品侍監陳進忠", workshop: "玉作", material: "玉", decrees: ["古雅", "整齊"], text: "乾隆四年十月十二日，七品侍監陳進忠傳旨：著玉作配做蜜蠟觀音蓮花座，不可過厚，務要整齊古雅，欽此。記此。" },
-            { id: 17, emperor: "乾隆", date: "乾隆九年五月二十日", sender: "太監胡世傑", workshop: "匣作", material: "木", decrees: ["文雅", "西洋花卉"], text: "乾隆九年五月二十日，太監胡世傑交來洋漆金線畫珊瑚盆景一盆.奉旨：著琺瑯作、匣作共同收拾，座子著用紫檀木做，雕西洋幾何花卉，務要文雅，欽此。記此。" },
-            { id: 18, emperor: "乾隆", date: "乾隆十五年八月初八日", sender: "太監常寧", workshop: "牙作", material: "牙", decrees: ["秀氣", "精細", "俗氣"], text: "乾隆十五年八月初八日，太監常寧交來雕象牙福壽鼻煙壺兩件。奉旨：此壺身花紋不甚秀氣，著牙作嗣後精細雕刻，不可俗氣，欽此。記此。" },
-            { id: 19, emperor: "乾隆", date: "乾隆二十五年六月三十日", sender: "太監鄂魯里", workshop: "做鐘處", material: "鐘", decrees: ["精細"], text: "乾隆二十五年六月三十日，太監鄂魯里傳旨：著做鐘處收拾大洋鐘一座，配做金琺瑯人物座架，務必刻工精細，欽此。記此。" },
-            { id: 20, emperor: "雍正", date: "雍正九年十二月初一日", sender: "總管太監劉雅各", workshop: "匣作", material: "木", decrees: ["古雅"], text: "雍正九年十二月初一日，總管太監劉雅各交來蜜蠟佛珠一盤。奉旨：著匣作配做黃緞面木匣盛裝，其蓋上著寫漢篆，務要古雅，欽此。記此。" },
-            { id: 21, emperor: "乾隆", date: "乾隆十三年四月初二日", sender: "太監毛團", workshop: "玻璃廠", material: "玻璃", decrees: ["文雅", "整齊"], text: "乾隆十三年四月初二日，太監毛團交來玻璃廠製藍玻璃碗一對。奉旨：著配紫檀木座，刻漢篆五言詩一首，務要整齊文雅，欽此。記此。" },
-            { id: 22, emperor: "乾隆", date: "乾隆三十五年九月十五日", sender: "太監胡世傑", workshop: "玉作", material: "玉", decrees: ["古雅", "不可過厚"], text: "乾隆三十五年九月十五日，太監胡世傑交來和闐青玉水注一件。奉旨：著玉作刻工精細，不可過厚，務要古雅，欽此。記此。" },
-            { id: 23, emperor: "雍正", date: "雍正八年六月十一日", sender: "副首領王太平", workshop: "琺瑯作", material: "琺瑯", decrees: ["秀氣", "精細"], text: "雍正八年六月十一日，副首領王太平交來洋金琺瑯香爐一件。奉旨：此耳不甚秀氣，著改做秀氣些，花紋要精細，欽此。記此。" },
-            { id: 24, emperor: "乾隆", date: "乾隆五十年十月十二日", sender: "太監常寧", workshop: "牙作", material: "牙", decrees: ["文雅", "俗氣"], text: "乾隆五十年十月十二日，太監常寧傳旨：著牙作雕刻象牙筆筒一件，著畫工寫樣呈覽，不准俗氣，務要文雅，欽此。記此。" }
-        ];
-
-      // 修改為這段：先檢查瀏覽器有沒有存過的資料，沒有再用原始資料
-let savedData = localStorage.getItem('myArchiveData');
-let currentDatabase = savedData ? JSON.parse(savedData) : [...originalDatabase];   
-       let filteredDatabase = [];
-        let selectedRecordId = 1;
-        let currentTab = 'chart';
-
-        window.onload = function() {
-            updateDashboard();
-            applyFilters();
-        };
-
-        function applyFilters() {
-            const empValue = document.getElementById("filterEmperor").value;
-            const wsValue = document.getElementById("filterWorkshop").value;
-            const matValue = document.getElementById("filterMaterial").value;
-            const keyword = document.getElementById("searchKeyword").value.trim();
-
-            filteredDatabase = currentDatabase.filter(item => {
-                const matchEmp = (empValue === "all" || item.emperor === empValue);
-                const matchWs = (wsValue === "all" || item.workshop === wsValue);
-                const matchMat = (matValue === "all" || item.material.includes(matValue));
-                
-                let matchKeyword = true;
-                if (keyword) {
-                    matchKeyword = item.text.includes(keyword) || 
-                                   item.date.includes(keyword) || 
-                                   item.sender.includes(keyword);
-                }
-                return matchEmp && matchWs && matchMat && matchKeyword;
-            });
-
-            document.getElementById("matchCount").innerText = filteredDatabase.length;
-            renderArchivesList();
-            renderCssChart();
-            
-            if (filteredDatabase.length > 0) {
-                selectRecord(filteredDatabase[0].id);
-            } else {
-                clearDetails();
-            }
-        }
-
-        function updateDashboard() {
-            document.getElementById("totalRecords").innerText = currentDatabase.length;
-            
-            const materials = new Set(currentDatabase.map(x => x.material));
-            document.getElementById("totalMaterials").innerText = materials.size;
-
-            const workshops = new Set(currentDatabase.map(x => x.workshop));
-            document.getElementById("totalWorkshops").innerText = workshops.size;
-
-            let totalDecrees = 0;
-            currentDatabase.forEach(x => { totalDecrees += x.decrees.length; });
-            document.getElementById("totalDecrees").innerText = totalDecrees;
-        }
-
-        function renderArchivesList() {
-            const container = document.getElementById("archivesListContainer");
-            container.innerHTML = "";
-
-            if (filteredDatabase.length === 0) {
-                container.innerHTML = `
-                    <div style="text-align: center; padding: 40px; border: 1px dashed #eedec4; background: white; border-radius: 6px;">
-                        <p style="color: var(--text-muted); font-family: sans-serif; font-size: 0.85rem;">未找到符合篩選條件的檔案，請重新調整篩選</p>
-                    </div>
-                `;
-                return;
-            }
-
-            const keyword = document.getElementById("searchKeyword").value.trim();
-
-            filteredDatabase.forEach(item => {
-                const isActive = item.id === selectedRecordId;
-                const activeClass = isActive ? 'active' : '';
-                
-                let highlightedText = item.text;
-                if (keyword) {
-                    const regex = new RegExp(`(${keyword})`, 'gi');
-                    highlightedText = item.text.replace(regex, '<mark style="background-color: #ffeb3b; color: black;">$1</mark>');
-                }
-
-            const cardHtml = `
-    <div onclick="selectRecord(${item.id})" class="archive-card ${activeClass}">
-        <div class="card-meta">
-            <span class="emperor-badge">${item.emperor}朝</span>
-            <span>${item.date}</span>
-        </div>
-        <p class="card-text">${highlightedText}</p>
-        
-        <div style="font-size: 0.8rem; color: #555; margin: 10px 0; padding-top: 5px; border-top: 1px solid #eee;">
-            <div><strong>匠人：</strong>${item.craftsman || '無'} | <strong>經辦：</strong>${item.sender || '無'}</div>
-            <div><strong>來源：</strong>${item.source || '無'} | <strong>空間：</strong>${item.space || '無'}</div>
-        </div>
-
-        <div class="card-tags">
-            <span class="badge badge-ws">🏢 ${item.workshop}</span>
-            <span class="badge badge-mat">📦 ${item.material}</span>
-            ${item.decrees.map(d => `<span class="badge badge-dec">✨ ${d}</span>`).join('')}
-        </div>
+    <div class="content-group">
+        <h3>學術背景</h3>
+        <ul class="data-list">
+            <li>國立政治大學 圖書資訊與檔案學研究 博士</li>
+            <li>國立臺北大學 古典文獻學研究所 碩士</li>
+        </ul>
     </div>
-`;
-              
-                container.innerHTML += cardHtml;
-            });
-        }
+</section>
 
-        function selectRecord(id) {
-            selectedRecordId = id;
-            
-            const cards = document.querySelectorAll('.archive-card');
-            cards.forEach(card => card.classList.remove('active'));
-            
-            renderArchivesList();
+<section id="works" style="background: var(--section-bg);">
+    <h2 class="section-title">著作成果</h2>
+    <div class="content-group">
+        <h3>(一) 專書論文</h3>
+        <ul class="data-list">
+            <li>徐美文。〈錢謙益著述與藏書之研究〉。國立台北大學古典文獻學研究所，碩士論文，2019。</li>
+            <li>徐美文。〈盛清時期宮廷用紙之研究—以圖書、檔案、書畫為中心〉。國立政治大學圖書資訊與檔案學研究所，博士論文，2022。</li>
+            <li>徐美文。《盛清時期宮廷圖書用紙》。台北，元華出版，2025年12月。</li>
+        </ul>
+    </div>
+    <div class="content-group">
+        <h3>(二) 編著專書</h3>
+        <ul class="data-list">
+            <li>徐美文，簡張翔，陳盈如，施維真。《圖書修護三兩事：一起推開修護室的大門一窺修護世界的神秘面紗(繪本)》。2025年4月。</li>
+            <li>蔡美蒨，蔡燕青，徐美文，李王瀚。《本事-圖書維護小事典》。國立中央圖書館台灣分館出版。2010年1月。</li>
+            <li>徐美文。《臺灣圖書醫院修護成果紀錄電子書》。國立臺灣圖書館，2016年1月。</li>
+            <li>曾添福，徐美文。《裝幀源流-傳世聚珍談裝幀圖錄》。國立臺灣圖書館，2006年7月。</li>
+        </ul>
+    </div>
+    <div class="content-group">
+        <h3>(三) 期刊論文</h3>
+        <ul class="data-list">
+            <li>徐美文。〈台灣第一座醫治圖書的醫院〉。《科技報導》346(2010):20-21。</li>
+            <li>徐美文。〈揭開宮內廳書陵部圖書修復及保存的神秘面紗〉。《臺灣博物季刊》(30)3(2011):92-99。</li>
+            <li>徐美文。〈光線對書本的影響-淺談古人與今人曝書〉。《科學月刊》515(2012):856-857。</li>
+            <li>林佳賢，徐美文。〈淺介南方草木狀考補〉。《林業試驗所林業圖書館館訊》17(2015):4。</li>
+            <li>Mei-Wen Hsu. Chiao-Min Lin. “The Use and Restoration of Papers for Archival Preservation—Case Study of National Taiwan Library.” Journal of Literature and Art Studies 8:6(2018): 977-988. doi: 10.17265/2159-5836/2018.06.018.</li>
+            <li>徐美文。〈書籍裝幀與水染藝術〉。《ACT藝術觀點》82(2020):22-27。</li>
+            <li>徐美文、王梅玲。〈日治時期迄今圖書修護三部曲：以臺灣圖書醫院為案例〉。《歷史臺灣》21(2021):129-157。</li>
+        </ul>
+    </div>
+    <div class="content-group">
+        <h3>(四) 會議或研討會論文</h3>
+        <ul class="data-list">
+            <li>徐美文。〈從紙質文獻修復的裱褙作為與不作為-探談台灣歌仔冊金鑲玉之裝幀保存〉。第二屆中華/波蘭美術與文化遺產國際學術研討會論文，國立臺南藝術大學暨國立成功大學，臺南，2014年12月。</li>
+            <li>徐美文。〈國立臺灣圖書館藏品與日常維護〉。雲林科技大學第十六屆文化山海觀「藝‧憶‧意‧繹」文化資產學術研討會論文，2016年。</li>
+            <li>Mei-Wen Hsu, Mei-Ling Wang. “A study on the education of volunteer workers repairing books for the library and their life-long learning.” The 7th Asia-Pacific Conference on Library & Information Education and Practice (A-LIEP, Nanjing, 2016), 50.</li>
+            <li>徐美文。〈清朝康雍乾刷印書籍與開化紙之研究〉。復旦大學開化紙製作工藝及開化紙本文獻國際學術研討會論文。2017年11月。</li>
+            <li>徐美文。〈來本線製書－紙張與中式經典縫法(含實作)〉。中華民國圖書館學會研習論文。2022年7月。</li>
+            <li>徐美文。〈古蘭似海-經典修復技法(含實作)〉。中華民國圖書館學會研習論文。2023年7月。</li>
+            <li>徐美文。〈國立臺灣圖書館修復古蘭經始末〉。國立臺灣圖書館臺灣圖書及檔案文獻保存維護研討會論文。2023年9月。</li>
+            <li>徐美文。〈匠人魂-古蘭經修復之旅〉。海峽兩岸檔案暨微縮學術交流會研討會論文。2025年6月。</li>
+            <li>徐美文。〈日式書籍裝幀：穿越日治時期看裝幀-融入式和本縫法〉。中華民國圖書館學會研習論文。2025年7月。</li>
+        </ul>
+    </div>
+</section>
 
-            const record = currentDatabase.find(x => x.id === id);
-            if (!record) return;
+<section id="media">
+    <h2 class="section-title">媒體採訪</h2>
+    <div class="content-group">
+        <h3>影音紀錄與專題報導 (25項完整紀錄)</h3>
+        <ul class="data-list">
+            <li>2024.05 大愛全紀實：<a class="media-link" href="https://tzuchi.us/zh/blog/taiwan-book-hospital-interview-june-2024" target="_blank">修復古蘭經：百年古蘭經的逆旅</a></li>
+            <li>2023.06 中華文化總會：<a class="media-link" href="https://www.youtube.com/watch?v=wgqvWP7fZwo" target="_blank">匠人魂 — 書籍修復師</a></li>
+            <li>2021.00 國立歷史博物館：〈台灣圖書醫院讓舊籍重生：專治疑難雜症的書醫生〉，《歷史文物》季刊 no.309。</li>
+            <li>2020.10 公視：<a class="media-link" href="https://www.youtube.com/watch?v=hmpB9bom1AQ" target="_blank">「旺來西瓜仙拚仙」【書醫生】節目</a></li>
+            <li>2020.07 大愛探索週報：【藏書與古蘭經】採訪專題。</li>
+            <li>2020.02 國興衛視：<a class="media-link" href="https://www.youtube.com/watch?v=bAVWLzqlPSI" target="_blank">《絕對台灣ぜったい台湾》第47集：神人妙手回春術</a></li>
+            <li>2018.11 民視異言堂：<a class="media-link" href="https://www.youtube.com/watch?v=pVIji-z7gVA" target="_blank">書醫院寂靜的救援</a></li>
+            <li>2018.09 台灣明錶雜誌：<a class="media-link" href="https://www.mingwatch.com/tw/?p=620" target="_blank">書籍修復師拍攝報導 (Ming Watch Taiwan)</a></li>
+            <li>2018.06 大愛電視：<a class="media-link" href="https://www.youtube.com/watch?v=iu2iEEPQImw" target="_blank">【青春愛讀書】在時光中尋字—第三章書的重生</a></li>
+            <li>2018.03 自由時報：<a class="media-link" href="https://news.ltn.com.tw/news/lifeweekly/paper/1182545" target="_blank">【妙職業破解】書醫生，專治書本疑難雜症</a></li>
+            <li>2017.11 影音報導：<a class="media-link" href="https://www.youtube.com/watch?v=jsYw60d9CeY" target="_blank">書醫師妙手回春 專治書本的疑難雜症</a></li>
+            <li>2017.11 影音報導：<a class="media-link" href="https://www.youtube.com/watch?v=DfC1Oj5r4Xk" target="_blank">自己的書自己救 書籍修復DIY一點都不難</a></li>
+            <li>2017.11 影音報導：<a class="media-link" href="https://www.youtube.com/watch?v=pVIji-z7gVA" target="_blank">「書醫生」一雙巧手 專治書本疑難雜症</a></li>
+            <li>2016.03 大愛電視：<a class="media-link" href="https://www.youtube.com/watch?v=iu2iEEPQImw" target="_blank">【青春愛讀書】電視拍攝紀實</a></li>
+            <li>2016.02 聯合報：副刊報導紀實。</li>
+            <li>2016.02 人間福報：<a class="media-link" href="http://www.merit-times.com.tw/NewsPage.aspx?unid=429586" target="_blank">專業書醫生報導</a></li>
+            <li>2016.01 教育廣播電台：專訪紀錄。</li>
+            <li>2015.09 大觀雜誌：書顏巧手話裝訂-館藏圖書修護特展。</li>
+            <li>2015.04 親親文化：出版《和紙玩遊戲》。</li>
+            <li>2014.07 書香遠傳：第114期專訪。</li>
+            <li>2013.03 蘋果日報：副刊採訪報導。</li>
+            <li>2012.01 書香遠傳：第99期專訪。</li>
+            <li>2011.11 自由時報：採訪報導。</li>
+            <li>2011.06 TO’GO泛遊情報：臺灣圖書醫院裝訂室第169期採訪。</li>
+            <li>2009.08 中國時報：10/開卷有書香報導。</li>
+        </ul>
+    </div>
+</section>
 
-            // 1. 外交學解構
-            const diploContainer = document.getElementById("diplomaticDetail");
-            diploContainer.innerHTML = `
-                <div style="border-bottom: 1px solid #eedec4; padding-bottom: 8px; margin-bottom: 12px;">
-                    <span style="font-size: 0.7rem; background-color: var(--ochre-gold); color: white; padding: 2px 6px; border-radius: 3px; font-family: sans-serif;">公文程式解構式</span>
-                    <h4 style="font-size: 0.9rem; margin-top: 5px; color: var(--primary-red);">${record.date}</h4>
-                </div>
-                <div class="diplo-item">
-                    <div class="diplo-title">📥 來源主動體 (Sender)：</div>
-                    <div>${record.sender} (權力指令發起者)</div>
-                </div>
-                <div class="diplo-item">
-                    <div class="diplo-title">⚙️ 承辦執行處 (Workshop)：</div>
-                    <div>${record.workshop} (工藝具體製作作坊)</div>
-                </div>
-                <div class="diplo-item">
-                    <div class="diplo-title">🏺 物質客體 (Object Material)：</div>
-                    <div>${record.material} (流轉之核心材料)</div>
-                </div>
-                <div class="diplo-item">
-                    <div class="diplo-title">✨ 帝王美學指令 (Aesthetic Command)：</div>
-                    <div>${record.decrees.join("、") || "無風格修飾詞"}</div>
-                </div>
-                <div style="background-color: #fdfaf3; border: 1px solid #eedec4; padding: 10px; border-radius: 4px; font-size: 0.75rem; margin-top: 15px; color: #5d4037;">
-                    <strong>📌 程式特徵考證：</strong>
-                    <ul style="padding-left: 15px; margin-top: 5px;">
-                        <li>「奉旨：」皇帝口諭、行政核心。</li>
-                        <li>「欽此」代表旨意指令語氣結束之斷點。</li>
-                        <li>「記此」造辦處筆帖式完件存檔標記。</li>
-                    </ul>
-                </div>
-            `;
+<section id="honors" style="background: var(--section-bg);">
+    <h2 class="section-title">專業榮譽</h2>
+    <ul class="data-list">
+        <li>『2010科普閱讀有獎徵文』榮獲物理類優選獎</li>
+        <li>榮獲『2022年斐陶斐榮譽會員』</li>
+    </ul>
+</section>
 
-            // 2. 故宮藏品推薦
-            const museumContainer = document.getElementById("museumDetail");
-            let artifactName = "";
-            let artifactDesc = "";
-            let svgIcon = "";
-
-            if (record.material === "琺瑯") {
-                artifactName = "清 乾隆 畫琺瑯牡丹花卉雙耳瓶";
-                artifactDesc = "故宮器物處藏，瓶身施白釉，彩繪折枝牡丹花卉，與檔案中「著改秀氣些、務要文雅」完美契合。";
-                svgIcon = `<svg viewBox="0 0 100 100" style="width: 50px; height: 50px;"><ellipse cx="50" cy="50" rx="15" ry="35" fill="#E67E22" stroke="#8A2024" stroke-width="2"/><ellipse cx="50" cy="30" rx="8" ry="12" fill="#FFF"/><path d="M40 50 Q30 40 40 30" stroke="#8A2024" fill="none" stroke-width="2"/><path d="M60 50 Q70 40 60 30" stroke="#8A2024" fill="none" stroke-width="2"/></svg>`;
-            } else if (record.material.includes("玉")) {
-                artifactName = "清 乾隆 溫潤白玉觀音立像";
-                artifactDesc = "故宮經典雕件，雕刻線條精細流暢，配有蜜蠟 or 紫檀底座，對應檔案中玉作與匣作共同配製。";
-                svgIcon = `<svg viewBox="0 0 100 100" style="width: 50px; height: 50px;"><path d="M50 15 Q35 30 40 60 Q45 80 50 85 Q55 80 60 60 Q65 30 50 15 Z" fill="#E6F2EC" stroke="#C9A054" stroke-width="2"/></svg>`;
-            } else {
-                artifactName = "清 宮廷造辦處 紫檀木雕案几底座";
-                artifactDesc = "造辦處木作經典藏品，工藝考究、比例端莊，常用於承托宮中珍貴白玉或玻璃碗器。";
-                svgIcon = `<svg viewBox="0 0 100 100" style="width: 50px; height: 50px;"><rect x="25" y="40" width="50" height="15" rx="2" fill="#5C3317" stroke="#3D210F" stroke-width="2"/><rect x="30" y="55" width="5" height="30" fill="#3D210F"/><rect x="65" y="55" width="5" height="30" fill="#3D210F"/></svg>`;
-            }
-
-            museumContainer.innerHTML = `
-                <div style="border-bottom: 1px solid #eedec4; padding-bottom: 8px; margin-bottom: 12px;">
-                    <span style="font-size: 0.7rem; background-color: #2e7d32; color: white; padding: 2px 6px; border-radius: 3px; font-family: sans-serif;">國立故宮博物院關聯文物</span>
-                    <h4 style="font-size: 0.9rem; margin-top: 5px; color: var(--primary-red);">${artifactName}</h4>
-                </div>
-                <div class="museum-card">
-                    <div class="museum-img-placeholder">
-                        ${svgIcon}
-                    </div>
-                    <p style="font-size: 0.75rem; color: var(--text-dark); leading-relaxed; font-family: sans-serif;">${artifactDesc}</p>
-                </div>
-                <div style="text-align: center; margin-top: 10px;">
-                    <a href="https://openapi.npm.gov.tw" target="_blank" style="font-size: 0.7rem; color: var(--ochre-gold); text-decoration: none; font-family: sans-serif; font-weight: bold;">👉 前往故宮 Open Data 跨庫檢索更多藏品 ↗</a>
-                </div>
-            `;
-        }
-
-        function clearDetails() {
-            document.getElementById("diplomaticDetail").innerHTML = `<p style="color: var(--text-muted); text-align: center; padding-top: 50px; font-family: sans-serif; font-size: 0.8rem;">無相符檔案以供解構。</p>`;
-            document.getElementById("museumDetail").innerHTML = `<p style="color: var(--text-muted); text-align: center; padding-top: 50px; font-family: sans-serif; font-size: 0.8rem;">無對應文物推薦。</p>`;
-        }
-
-       function renderCssChart() {
-    const container = document.getElementById("cssChart");
-    container.innerHTML = "";
-
-    // 【自動掃描邏輯】：不再使用固定的 list
-    const stats = {};
+<section id="cases">
+    <h2 class="section-title">修復案例</h2>
     
-    // 遍歷所有已篩選的資料，將出現的詞自動加入統計
-    filteredDatabase.forEach(item => {
-        item.decrees.forEach(d => {
-            if (!stats[d]) {
-                stats[d] = 1;
+    <div class="content-group">
+        <h3>👨‍🏫 徐老師修復案例作品</h3>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; margin-bottom: 50px;">
+            
+            <div style="background: white; border: 1px solid #eee; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.05);">
+                <img src="https://images.unsplash.com/photo-1544947950-fa07a98d237f?w=500" style="width: 100%; height: 200px; object-fit: cover;" alt="古籍修復">
+                <div style="padding: 15px;">
+                    <h4 style="margin: 0 0 10px 0; font-size: 1.1rem; color: #1a1a1a;">清代宮廷珍籍扉頁修復</h4>
+                    <p style="margin: 0; font-size: 0.9rem; color: #666;">運用開化紙與天然植物染料進行托裱修護，完整還原盛清裝幀風貌。</p>
+                </div>
+            </div>
+
+            <div style="background: white; border: 1px solid #eee; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.05);">
+                <img src="https://images.unsplash.com/photo-1589829085413-56de8ae18c73?w=500" style="width: 100%; height: 200px; object-fit: cover;" alt="文獻檔案整飭">
+                <div style="padding: 15px;">
+                    <h4 style="margin: 0 0 10px 0; font-size: 1.1rem; color: #1a1a1a;">百年《古蘭經》重裱與封面加固</h4>
+                    <p style="margin: 0; font-size: 0.9rem; color: #666;">針對蟲蛀與酸化的經書進行寂靜救援，重現經典歷史價值。</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <hr style="border: 0; border-top: 1px dashed #ddd; margin: 40px 0;">
+
+    <div class="content-group">
+        <h3>🎓 歷年課堂學生修復案例</h3>
+        
+        <div style="background: #fbf9f5; padding: 25px; border: 1px dashed #8d734a; border-radius: 8px; margin-bottom: 40px;">
+            <h4 style="margin-top:0; color: #8d734a; font-size: 1.1rem;">📥 學生課堂成果提交（免後台、支援雲端檔案）</h4>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-bottom: 15px;">
+                <div>
+                    <label style="display:block; font-size:0.85rem; margin-bottom:5px;">課堂學年度：</label>
+                    <select id="caseYear" style="width:100%; padding:8px; border:1px solid #ddd; border-radius:4px;">
+                        <option value="2026">2026 年學生課堂修復案例</option>
+                        <option value="2027">2027 年學生課堂修復案例</option>
+                        <option value="2028">2028 年學生課堂修復案例</option>
+                        <option value="2029">2029 年學生課堂修復案例</option>
+                        <option value="2030">2030 年學生課堂修復案例</option>
+                    </select>
+                </div>
+                <div>
+                    <label style="display:block; font-size:0.85rem; margin-bottom:5px;">案例名稱 / 學生姓名：</label>
+                    <input type="text" id="caseTitle" placeholder="如：歌仔冊金鑲玉裝幀修復 - 王大同" style="width:100%; padding:8px; border:1px solid #ddd; border-radius:4px;">
+                </div>
+                <div>
+                    <label style="display:block; font-size:0.85rem; margin-bottom:5px;">上傳成果照片（圖卡封面）：</label>
+                    <input type="file" id="caseImage" accept="image/*" style="width:100%; padding:5px;">
+                </div>
+                <div>
+                    <label style="display:block; font-size:0.85rem; margin-bottom:5px;">完整報告連結 (Word/PPT雲端網址)：</label>
+                    <input type="url" id="caseLink" placeholder="https://drive.google.com/..." style="width:100%; padding:8px; border:1px solid #ddd; border-radius:4px;">
+                </div>
+            </div>
+            <button onclick="uploadCase()" style="background: #8d734a; color: white; border: none; padding: 10px 20px; border-radius: 4px; cursor: pointer; font-weight: bold;">發布成果</button>
+        </div>
+
+        <div style="margin-bottom: 25px; display: flex; flex-wrap: wrap; gap: 10px; border-bottom: 2px solid #eee; padding-bottom: 10px;">
+            <button onclick="filterYear('2026')" id="btn-2026" style="background: #8d734a; color: white; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer; font-weight: 500;">2026 年度</button>
+            <button onclick="filterYear('2027')" id="btn-2027" style="background: #eee; color: #333; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer; font-weight: 500;">2027 年度</button>
+            <button onclick="filterYear('2028')" id="btn-2028" style="background: #eee; color: #333; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer; font-weight: 500;">2028 年度</button>
+            <button onclick="filterYear('2029')" id="btn-2029" style="background: #eee; color: #333; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer; font-weight: 500;">2029 年度</button>
+            <button onclick="filterYear('2030')" id="btn-2030" style="background: #eee; color: #333; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer; font-weight: 500;">2030 年度</button>
+        </div>
+
+        <div id="dynamicCasesList" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 10fr)); gap: 20px;">
+            </div>
+    </div>
+</section>
+
+<script>
+    // 預設顯示 2026 年度的資料
+    let currentSelectYear = '2026';
+    const totalYears = ['2026', '2027', '2028', '2029', '2030'];
+
+    window.addEventListener('DOMContentLoaded', () => {
+        displayLocalCases();
+    });
+
+    function filterYear(year) {
+        currentSelectYear = year;
+        // 切換按鈕顏色樣式
+        totalYears.forEach(y => {
+            const btn = document.getElementById(`btn-${y}`);
+            if(y === year) {
+                btn.style.background = '#8d734a';
+                btn.style.color = 'white';
             } else {
-                stats[d]++;
+                btn.style.background = '#eee';
+                btn.style.color = '#333';
             }
         });
-    });
+        displayLocalCases();
+    }
 
-    // 計算最大值來調整長條比例
-    const values = Object.values(stats);
-    const maxVal = values.length > 0 ? Math.max(...values) : 1; 
+    function uploadCase() {
+        const year = document.getElementById('caseYear').value;
+        const title = document.getElementById('caseTitle').value.trim();
+        const imageFile = document.getElementById('caseImage').files[0];
+        const cloudLink = document.getElementById('caseLink').value.trim();
 
-    // 將所有統計到的詞彙動態渲染出來
-    Object.keys(stats).forEach(key => {
-        const count = stats[key];
-        const percentage = (count / maxVal) * 100;
+        if (!title || !imageFile) {
+            alert('請填寫案例名稱與姓名，並選擇一張成果照片！');
+            return;
+        }
+
+        const reader = new FileReader();
+        reader.onload = function (e) {
+            const base64Image = e.target.result;
+
+            const newCase = {
+                year: year,
+                title: title,
+                image: base64Image,
+                link: cloudLink,
+                date: new Date().toLocaleDateString()
+            };
+
+            let localCases = JSON.parse(localStorage.getItem('academicLabStudentCases')) || [];
+            localCases.push(newCase);
+            localStorage.setItem('academicLabStudentCases', JSON.stringify(localCases));
+
+            // 重設輸入表單
+            document.getElementById('caseTitle').value = '';
+            document.getElementById('caseImage').value = '';
+            document.getElementById('caseLink').value = '';
+            
+            // 跳轉到剛剛上傳的那個年份查看
+            filterYear(year);
+        };
         
-        const rowHtml = `
-            <div class="chart-row">
-                <div class="chart-label">${key}</div>
-                <div class="chart-bar-bg">
-                    <div class="chart-bar-fill" style="width: ${percentage}%;"></div>
+        reader.readAsDataURL(imageFile);
+    }
+
+    function displayLocalCases() {
+        const container = document.getElementById('dynamicCasesList');
+        container.innerHTML = '';
+        
+        const localCases = JSON.parse(localStorage.getItem('academicLabStudentCases')) || [];
+        
+        // 篩選出目前選定年份的學生資料
+        const filteredCases = localCases.filter(item => item.year === currentSelectYear);
+
+        if (filteredCases.length === 0) {
+            container.innerHTML = `<div style="padding: 40px; border: 2px dashed #ddd; text-align: center; color: #aaa; border-radius: 8px; grid-column: 1/-1;"><p>目前尚無 ${currentSelectYear} 學年度的上傳案例成果。</p></div>`;
+            return;
+        }
+
+        filteredCases.forEach((item) => {
+            // 尋找該項目在總陣列中的真實 index，以便刪除
+            const realIndex = localCases.findIndex(c => c === item);
+            
+            // 檢查有沒有附上雲端報告連結
+            const linkButton = item.link 
+                ? `<a href="${item.link}" target="_blank" style="display:inline-block; margin-top:10px; color:#8d734a; text-decoration:none; font-weight:500; font-size:0.9rem; border-bottom:1px solid #8d734a;">📂 查看雲端完整報告 (Word/PPT) →</a>` 
+                : '';
+
+            container.innerHTML += `
+                <div style="background: white; border: 1px solid #eee; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.05); position: relative;">
+                    <img src="${item.image}" style="width: 100%; height: 200px; object-fit: cover;">
+                    <div style="padding: 15px;">
+                        <h4 style="margin: 0 0 10px 0; font-size: 1.1rem; color: #1a1a1a;">${item.title}</h4>
+                        <p style="margin: 0; font-size: 0.8rem; color: #888;">📅 上傳日期：${item.date}</p>
+                        ${linkButton}
+                    </div>
+                    <button onclick="deleteCase(${realIndex})" style="position: absolute; top: 10px; right: 10px; background: rgba(255,0,0,0.7); color: white; border: none; border-radius: 50%; width: 25px; height: 25px; cursor: pointer;">×</button>
                 </div>
-                <div class="chart-value">${count}</div>
-            </div>
-        `;
-        container.innerHTML += rowHtml;
-    });
-}
-
-        function toggleTeacherPanel() {
-            document.getElementById("teacherPanel").classList.toggle("hidden");
-        }
-
-       function addNewRecord() {
-    const rawText = document.getElementById("rawInputText").value.trim();
-    const emperor = document.getElementById("newEmperor").value;
-    const workshop = document.getElementById("newWorkshop").value.trim() || "未知作坊";
-    
-    // --- 新增這四行來抓取新欄位的數據 ---
-    const craftsman = document.getElementById("newCraftsman").value.trim() || "未詳";
-    const person = document.getElementById("newPerson").value.trim() || "未詳";
-    const source = document.getElementById("newSource").value.trim() || "未詳";
-    const space = document.getElementById("newSpace").value.trim() || "未詳";
-    // ----------------------------------
-
-    const material = document.getElementById("newMaterial").value.trim() || "未知材料";
-    const decreesRaw = document.getElementById("newDecrees").value.trim();
-
-    if (!rawText) {
-        showToast("⚠️ 請至少輸入一段原始活計檔文本！");
-        return;
+            `;
+        });
     }
 
-    let date = "清代某日";
-    const dateMatch = rawText.match(/^(.*?日)/);
-    if (dateMatch) date = dateMatch[1];
-
-    const decrees = decreesRaw ? decreesRaw.split(",").map(x => x.trim()) : ["精細"];
-
-    // 將新資料加入物件中
-    const newRecord = {
-        id: currentDatabase.length + 1,
-        emperor: emperor,
-        date: date,
-        sender: person,      // 這裡對應了您的「經辦太監/官員」
-        workshop: workshop,
-        material: material,
-        decrees: decrees,
-        text: rawText,
-        craftsman: craftsman, // 新增屬性
-        source: source,       // 新增屬性
-        space: space          // 新增屬性
-    };
-
-    currentDatabase.push(newRecord);
-// ... 您原本的程式碼
-currentDatabase.push(newRecord);
-
-// 【關鍵修正】：請補上這三行
-localStorage.setItem('myArchiveData', JSON.stringify(currentDatabase)); // 1. 存檔到瀏覽器
-renderArchives(); // 2. 強制更新畫面的列表
-location.reload(); // 3. 強制重新整理，讓「總收錄案件」的數字正確更新
-localStorage.setItem('myArchiveData', JSON.stringify(currentDatabase));
-    
-    // 清空輸入框
-    document.getElementById("rawInputText").value = "";
-    document.getElementById("newWorkshop").value = "";
-    document.getElementById("newMaterial").value = "";
-    document.getElementById("newDecrees").value = "";
-    document.getElementById("newCraftsman").value = ""; // 清空新增框
-    document.getElementById("newPerson").value = "";    // 清空新增框
-    document.getElementById("newSource").value = "";    // 清空新增框
-    document.getElementById("newSpace").value = "";     // 清空新增框
-    
-    showToast("📥 成功解析並錄入新檔案！");
-    updateDashboard();
-    applyFilters();
-}
-
-        function switchTab(tabId) {
-            currentTab = tabId;
-            const tabs = ['chart', 'diplomatic', 'museum'];
-            tabs.forEach(t => {
-                const content = document.getElementById(`tabContent-${t}`);
-                const btn = document.getElementById(`tabBtn-${t}`);
-                if (t === tabId) {
-                    content.classList.remove("hidden");
-                    btn.classList.add("active");
-                } else {
-                    content.classList.add("hidden");
-                    btn.classList.remove("active");
-                }
-            });
-        }
-
-        function showToast(message) {
-            const toast = document.getElementById("toast");
-            toast.innerText = message;
-            toast.style.display = "block";
-            setTimeout(() => { toast.style.display = "none"; }, 3000);
-        }
-
-        function copyEmbedCode() {
-// 【引擎】：負責產生矩陣 (這是缺少的關鍵部分)
-function generateMatrix() {
-    const matrix = {};
-    currentDatabase.forEach(item => {
-        const s = item.sender || "無";
-        const w = item.workshop || "無";
-        if (!matrix[s]) matrix[s] = {};
-        if (!matrix[s][w]) matrix[s][w] = 0;
-        matrix[s][w]++;
-    });
-    return matrix;
-}
-
-// 【輸出】：負責匯出 CSV (您已經貼好的部分)
-function exportCSV() {
-    const matrix = generateMatrix(); 
-    let csvContent = "data:text/csv;charset=utf-8,來源,作坊,次數\n";
-    
-    for (let sender in matrix) {
-        for (let workshop in matrix[sender]) {
-            csvContent += `${sender},${workshop},${matrix[sender][workshop]}\n`;
+    function deleteCase(realIndex) {
+        if(confirm('確定要刪除此項學生成果案例嗎？')) {
+            let localCases = JSON.parse(localStorage.getItem('academicLabStudentCases')) || [];
+            localCases.splice(realIndex, 1);
+            localStorage.setItem('academicLabStudentCases', JSON.stringify(localCases));
+            displayLocalCases();
         }
     }
-    
-    const encodedUri = encodeURI(csvContent);
-    const link = document.createElement("a");
-    link.setAttribute("href", encodedUri);
-    link.setAttribute("download", "行政互動矩陣.csv");
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-}
-            const embedCode = `<iframe src="https://dr-hsumeiwen.github.io/lab/archive_tool.html" width="100%" height="800px" frameborder="0"></iframe>`;
-            const tempInput = document.createElement("input");
-            tempInput.value = embedCode;
-            document.body.appendChild(tempInput);
-            tempInput.select();
-            document.execCommand("copy");
-            document.body.removeChild(tempInput);
-            showToast("📋 嵌入代碼已複製到剪貼簿！");
-        }
-// 【新增】匯出行政矩陣為 CSV
-function exportCSV() {
-    const matrix = generateMatrix(); // 呼叫剛剛的函數
-    let csvContent = "data:text/csv;charset=utf-8,來源,作坊,次數\n";
-    
-    for (let sender in matrix) {
-        for (let workshop in matrix[sender]) {
-            csvContent += `${sender},${workshop},${matrix[sender][workshop]}\n`;
-        }
-    }
-    
-    const encodedUri = encodeURI(csvContent);
-    const link = document.createElement("a");
-    link.setAttribute("href", encodedUri);
-    link.setAttribute("download", "行政互動矩陣.csv");
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-}
-    </script>
+</script><section id="lab" style="background: #fff;">
+    <h2 class="section-title">清代活計檔數位人文分析平台</h2>
+    <iframe src="https://dr-hsumeiwen.github.io/lab/archive_tool.html?v=3" width="100%" height="900px" frameborder="0"></iframe>
+</section>
+
+<footer>
+    <p>&copy; 2026 徐美文學術研究室 | Hsu Mei-Wen Academic Lab. <br> 學術諮詢與客座邀約：fubefube96@gmail.com</p>
+</footer>
+
 </body>
 </html>
