@@ -984,13 +984,14 @@ let currentDatabase = savedData ? JSON.parse(savedData) : [...originalDatabase];
                 <div class="museum-card">
                     <div class="museum-img-placeholder">
                         ${svgIcon}
-                    </div>
+                    </div><div style="text-align: center; margin-top: 10px;">
                     <p style="font-size: 0.75rem; color: var(--text-dark); leading-relaxed; font-family: sans-serif;">${artifactDesc}</p>
                 </div>
                <div style="text-align: center; margin-top: 10px;">
-    <a href="https://openapi.npm.gov.tw" target="_blank" style="font-size: 0.7rem; color: var(--ochre-gold); text-decoration: none; font-family: sans-serif; font-weight: bold; cursor: pointer; position: relative; z-index: 100;">
-        👉 前往故宮 Open Data 跨庫檢索更多藏品 ↗
-    </a>
+   <a href="https://digitalarchive.npm.gov.tw/opendata" target="_blank" 
+   style="font-size: 0.7rem; color: var(--ochre-gold); text-deceoration: none; font-family: sans-serif; font-weight: bold; cursor: pointer; position: relative; z-index: 100; pointer-events: auto;">
+   👉 前往故宮 Open Data 跨庫檢索更多藏品 ↗
+</a>
 </div>
                 </div>
             `;
