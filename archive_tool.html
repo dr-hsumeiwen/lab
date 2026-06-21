@@ -885,19 +885,26 @@
                     highlightedText = item.text.replace(regex, '<mark style="background-color: #ffeb3b; color: black;">$1</mark>');
                 }
 
-                const cardHtml = `
-                    <div onclick="selectRecord(${item.id})" class="archive-card ${activeClass}">
-                        <div class="card-meta">
-                            <span class="emperor-badge">${item.emperor}朝</span>
-                            <span>${item.date}</span>
-                        </div>
-                        <p class="card-text">${highlightedText}</p>
-                        <div class="card-tags">
-                            <span class="badge badge-ws">🏢 ${item.workshop}</span>
-                            <span class="badge badge-mat">📦 ${item.material}</span>
-                            ${item.decrees.map(d => `<span class="badge badge-dec">✨ ${d}</span>`).join('')}
-                        </div>
-                    </div>
+            const cardHtml = `
+    <div onclick="selectRecord(${item.id})" class="archive-card ${activeClass}">
+        <div class="card-meta">
+            <span class="emperor-badge">${item.emperor}朝</span>
+            <span>${item.date}</span>
+        </div>
+        <p class="card-text">${highlightedText}</p>
+        
+        <div style="font-size: 0.8rem; color: #555; margin: 10px 0; padding-top: 5px; border-top: 1px solid #eee;">
+            <div><strong>匠人：</strong>${item.craftsman || '無'} | <strong>經辦：</strong>${item.sender || '無'}</div>
+            <div><strong>來源：</strong>${item.source || '無'} | <strong>空間：</strong>${item.space || '無'}</div>
+        </div>
+
+        <div class="card-tags">
+            <span class="badge badge-ws">🏢 ${item.workshop}</span>
+            <span class="badge badge-mat">📦 ${item.material}</span>
+            ${item.decrees.map(d => `<span class="badge badge-dec">✨ ${d}</span>`).join('')}
+        </div>
+    </div>
+`;
                 `;
                 container.innerHTML += cardHtml;
             });
@@ -1028,46 +1035,63 @@
             document.getElementById("teacherPanel").classList.toggle("hidden");
         }
 
-        function addNewRecord() {
-            const rawText = document.getElementById("rawInputText").value.trim();
-            const emperor = document.getElementById("newEmperor").value;
-            const workshop = document.getElementById("newWorkshop").value.trim() || "未知作坊";
-            const material = document.getElementById("newMaterial").value.trim() || "未知材料";
-            const decreesRaw = document.getElementById("newDecrees").value.trim();
+       function addNewRecord() {
+    const rawText = document.getElementById("rawInputText").value.trim();
+    const emperor = document.getElementById("newEmperor").value;
+    const workshop = document.getElementById("newWorkshop").value.trim() || "未知作坊";
+    
+    // --- 新增這四行來抓取新欄位的數據 ---
+    const craftsman = document.getElementById("newCraftsman").value.trim() || "未詳";
+    const person = document.getElementById("newPerson").value.trim() || "未詳";
+    const source = document.getElementById("newSource").value.trim() || "未詳";
+    const space = document.getElementById("newSpace").value.trim() || "未詳";
+    // ----------------------------------
 
-            if (!rawText) {
-                showToast("⚠️ 請至少輸入一段原始活計檔文本！");
-                return;
-            }
+    const material = document.getElementById("newMaterial").value.trim() || "未知材料";
+    const decreesRaw = document.getElementById("newDecrees").value.trim();
 
-            let date = "清代某日";
-            const dateMatch = rawText.match(/^(.*?日)/);
-            if (dateMatch) date = dateMatch[1];
+    if (!rawText) {
+        showToast("⚠️ 請至少輸入一段原始活計檔文本！");
+        return;
+    }
 
-            const decrees = decreesRaw ? decreesRaw.split(",").map(x => x.trim()) : ["精細"];
+    let date = "清代某日";
+    const dateMatch = rawText.match(/^(.*?日)/);
+    if (dateMatch) date = dateMatch[1];
 
-            const newRecord = {
-                id: currentDatabase.length + 1,
-                emperor: emperor,
-                date: date,
-                sender: "課堂錄入主體",
-                workshop: workshop,
-                material: material,
-                decrees: decrees,
-                text: rawText
-            };
+    const decrees = decreesRaw ? decreesRaw.split(",").map(x => x.trim()) : ["精細"];
 
-            currentDatabase.push(newRecord);
-            
-            document.getElementById("rawInputText").value = "";
-            document.getElementById("newWorkshop").value = "";
-            document.getElementById("newMaterial").value = "";
-            document.getElementById("newDecrees").value = "";
-            
-            showToast("📥 成功解析並錄入新檔案！");
-            updateDashboard();
-            applyFilters();
-        }
+    // 將新資料加入物件中
+    const newRecord = {
+        id: currentDatabase.length + 1,
+        emperor: emperor,
+        date: date,
+        sender: person,      // 這裡對應了您的「經辦太監/官員」
+        workshop: workshop,
+        material: material,
+        decrees: decrees,
+        text: rawText,
+        craftsman: craftsman, // 新增屬性
+        source: source,       // 新增屬性
+        space: space          // 新增屬性
+    };
+
+    currentDatabase.push(newRecord);
+    
+    // 清空輸入框
+    document.getElementById("rawInputText").value = "";
+    document.getElementById("newWorkshop").value = "";
+    document.getElementById("newMaterial").value = "";
+    document.getElementById("newDecrees").value = "";
+    document.getElementById("newCraftsman").value = ""; // 清空新增框
+    document.getElementById("newPerson").value = "";    // 清空新增框
+    document.getElementById("newSource").value = "";    // 清空新增框
+    document.getElementById("newSpace").value = "";     // 清空新增框
+    
+    showToast("📥 成功解析並錄入新檔案！");
+    updateDashboard();
+    applyFilters();
+}
 
         function switchTab(tabId) {
             currentTab = tabId;
