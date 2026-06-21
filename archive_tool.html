@@ -646,7 +646,7 @@
 
             <div class="button-group">
                 <button onclick="toggleTeacherPanel()" class="btn btn-gold">⚙️ 課堂互動自建庫</button>
-                <button onclick="copyEmbedCode()" class="btn btn-outline">📋 複製嵌入代碼</button>
+                <button onclick="copyEmbedCode()" class="btn btn-outline">📋 複製嵌入代碼</button><button onclick="exportCSV()" class="btn btn-outline">📊 匯出行政矩陣 (CSV)</button>
             </div>
 
             <!-- 教師自建庫面板 -->
@@ -1134,6 +1134,25 @@ localStorage.setItem('myArchiveData', JSON.stringify(currentDatabase));
             document.body.removeChild(tempInput);
             showToast("📋 嵌入代碼已複製到剪貼簿！");
         }
+// 【新增】匯出行政矩陣為 CSV
+function exportCSV() {
+    const matrix = generateMatrix(); // 呼叫剛剛的函數
+    let csvContent = "data:text/csv;charset=utf-8,來源,作坊,次數\n";
+    
+    for (let sender in matrix) {
+        for (let workshop in matrix[sender]) {
+            csvContent += `${sender},${workshop},${matrix[sender][workshop]}\n`;
+        }
+    }
+    
+    const encodedUri = encodeURI(csvContent);
+    const link = document.createElement("a");
+    link.setAttribute("href", encodedUri);
+    link.setAttribute("download", "行政互動矩陣.csv");
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+}
     </script>
 </body>
 </html>
