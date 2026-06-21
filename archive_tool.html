@@ -1124,11 +1124,11 @@ localStorage.setItem('myArchiveData', JSON.stringify(currentDatabase));
             setTimeout(() => { toast.style.display = "none"; }, 3000);
         }
 
-        function copyEmbedCode() {
+       
 // 【引擎】：負責產生矩陣 (這是缺少的關鍵部分)
-function generateMatrix() {
-    const matrix = {};
-    currentDatabase.forEach(item => {
+     function generateMatrix() {
+        const matrix = {};
+        currentDatabase.forEach(item => {
         const s = item.sender || "無";
         const w = item.workshop || "無";
         if (!matrix[s]) matrix[s] = {};
@@ -1138,34 +1138,18 @@ function generateMatrix() {
     return matrix;
 }
 
-// 【輸出】：負責匯出 CSV (您已經貼好的部分)
-function exportCSV() {
-    const matrix = generateMatrix(); 
-    let csvContent = "data:text/csv;charset=utf-8,來源,作坊,次數\n";
-    
-    for (let sender in matrix) {
-        for (let workshop in matrix[sender]) {
-            csvContent += `${sender},${workshop},${matrix[sender][workshop]}\n`;
-        }
-    }
-    
-    const encodedUri = encodeURI(csvContent);
-    const link = document.createElement("a");
-    link.setAttribute("href", encodedUri);
-    link.setAttribute("download", "行政互動矩陣.csv");
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+ 
+function copyEmbedCode() {
+    const embedCode = `<iframe src="https://dr-hsumeiwen.github.io/lab/archive_tool.html" width="100%" height="800px" frameborder="0"></iframe>`;
+    const tempInput = document.createElement("input");
+    tempInput.value = embedCode;
+    document.body.appendChild(tempInput);
+    tempInput.select();
+    document.execCommand("copy");
+    document.body.removeChild(tempInput);
+    showToast("📋 嵌入代碼已複製到剪貼簿！");
 }
-            const embedCode = `<iframe src="https://dr-hsumeiwen.github.io/lab/archive_tool.html" width="100%" height="800px" frameborder="0"></iframe>`;
-            const tempInput = document.createElement("input");
-            tempInput.value = embedCode;
-            document.body.appendChild(tempInput);
-            tempInput.select();
-            document.execCommand("copy");
-            document.body.removeChild(tempInput);
-            showToast("📋 嵌入代碼已複製到剪貼簿！");
-        }
+
 // 【新增】匯出行政矩陣為 CSV
 function exportCSV() {
     const matrix = generateMatrix(); // 呼叫剛剛的函數
