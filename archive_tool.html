@@ -1084,6 +1084,13 @@ let currentDatabase = savedData ? JSON.parse(savedData) : [...originalDatabase];
     };
 
     currentDatabase.push(newRecord);
+// ... 您原本的程式碼
+currentDatabase.push(newRecord);
+
+// 【關鍵修正】：請補上這三行
+localStorage.setItem('myArchiveData', JSON.stringify(currentDatabase)); // 1. 存檔到瀏覽器
+renderArchives(); // 2. 強制更新畫面的列表
+location.reload(); // 3. 強制重新整理，讓「總收錄案件」的數字正確更新
 localStorage.setItem('myArchiveData', JSON.stringify(currentDatabase));
     
     // 清空輸入框
