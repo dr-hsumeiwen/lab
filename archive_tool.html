@@ -905,7 +905,7 @@
         </div>
     </div>
 `;
-                
+              
                 container.innerHTML += cardHtml;
             });
         }
@@ -996,40 +996,45 @@
             document.getElementById("museumDetail").innerHTML = `<p style="color: var(--text-muted); text-align: center; padding-top: 50px; font-family: sans-serif; font-size: 0.8rem;">無對應文物推薦。</p>`;
         }
 
-        function renderCssChart() {
-            const container = document.getElementById("cssChart");
-            container.innerHTML = "";
+       function renderCssChart() {
+    const container = document.getElementById("cssChart");
+    container.innerHTML = "";
 
-            const list = ["秀氣", "精細", "文雅", "俗氣", "西洋花卉", "不可過厚", "古雅", "整齊"];
-            const stats = {};
-            list.forEach(item => { stats[item] = 0; });
+    // 【自動掃描邏輯】：不再使用固定的 list
+    const stats = {};
+    
+    // 遍歷所有已篩選的資料，將出現的詞自動加入統計
+    filteredDatabase.forEach(item => {
+        item.decrees.forEach(d => {
+            if (!stats[d]) {
+                stats[d] = 1;
+            } else {
+                stats[d]++;
+            }
+        });
+    });
 
-            filteredDatabase.forEach(item => {
-                item.decrees.forEach(d => {
-                    if (stats[d] !== undefined) {
-                        stats[d]++;
-                    }
-                });
-            });
+    // 計算最大值來調整長條比例
+    const values = Object.values(stats);
+    const maxVal = values.length > 0 ? Math.max(...values) : 1; 
 
-            const maxVal = Math.max(...Object.values(stats), 1); 
-
-            Object.keys(stats).forEach(key => {
-                const count = stats[key];
-                const percentage = (count / maxVal) * 100;
-                
-                const rowHtml = `
-                    <div class="chart-row">
-                        <div class="chart-label">${key}</div>
-                        <div class="chart-bar-bg">
-                            <div class="chart-bar-fill" style="width: ${percentage}%;"></div>
-                        </div>
-                        <div class="chart-value">${count}</div>
-                    </div>
-                `;
-                container.innerHTML += rowHtml;
-            });
-        }
+    // 將所有統計到的詞彙動態渲染出來
+    Object.keys(stats).forEach(key => {
+        const count = stats[key];
+        const percentage = (count / maxVal) * 100;
+        
+        const rowHtml = `
+            <div class="chart-row">
+                <div class="chart-label">${key}</div>
+                <div class="chart-bar-bg">
+                    <div class="chart-bar-fill" style="width: ${percentage}%;"></div>
+                </div>
+                <div class="chart-value">${count}</div>
+            </div>
+        `;
+        container.innerHTML += rowHtml;
+    });
+}
 
         function toggleTeacherPanel() {
             document.getElementById("teacherPanel").classList.toggle("hidden");
